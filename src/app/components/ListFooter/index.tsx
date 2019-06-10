@@ -1,51 +1,32 @@
 import * as React from 'react';
 import * as style from './style.css';
-import * as classNames from 'classnames';
 import { ListModel } from 'app/models';
-
-export const FILTER_TITLES = {
-  [ListModel.Filter.SHOW_ALL]: 'All',
-  [ListModel.Filter.SHOW_ACTIVE]: 'Active',
-  [ListModel.Filter.SHOW_COMPLETED]: 'Completed'
-};
+import { ListActions } from 'app/actions';
 
 export namespace ListFooter {
   export interface Props {
-    filter: ListModel.Filter;
-    activeCount?: number;
+    lists: ListModel[];
+    listActions: ListActions;
+    listCount?: number;
     completedCount?: number;
-    onClickFilter: (filter: ListModel.Filter) => any;
     onClickClearCompleted: () => any;
   }
 }
 
 export class Footer extends React.Component<ListFooter.Props> {
   static defaultProps: Partial<ListFooter.Props> = {
-    activeCount: 0,
+    listCount: 0,
     completedCount: 0
   };
 
   renderListCount(): JSX.Element {
-    const { activeCount } = this.props;
-    const itemWord = activeCount === 1 ? 'item' : 'items';
+    const { listCount } = this.props;
+    const itemWord = listCount === 1 ? 'item' : 'items';
 
     return (
       <span className={style.count}>
-        <strong>{activeCount || 'No'}</strong> {itemWord} left
+        <strong>{listCount || 'No'}</strong> {itemWord} left
       </span>
-    );
-  }
-
-  renderFilterLink(filter: ListModel.Filter): JSX.Element {
-    const { filter: selectedFilter, onClickFilter } = this.props;
-
-    return (
-      <a
-        className={classNames({ [style.selected]: filter === selectedFilter })}
-        style={{ cursor: 'pointer' }}
-        onClick={() => onClickFilter(filter)}
-        children={FILTER_TITLES[filter]}
-      />
     );
   }
 
@@ -66,11 +47,6 @@ export class Footer extends React.Component<ListFooter.Props> {
     return (
       <footer className={style.normal}>
         {this.renderListCount()}
-        <ul className={style.filters}>
-          {(Object.keys(ListModel.Filter) as (keyof typeof ListModel.Filter)[]).map((key) => (
-            <li key={key} children={this.renderFilterLink(ListModel.Filter[key])} />
-          ))}
-        </ul>
         {this.renderClearButton()}
       </footer>
     );

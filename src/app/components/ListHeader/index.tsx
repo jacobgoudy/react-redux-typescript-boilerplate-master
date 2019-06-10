@@ -23,7 +23,6 @@ export class ListHeader extends React.Component<ListHeader.Props> {
   render() {
     return (
       <header>
-        <h1>Lists</h1>
         <ListTextInput newList onSave={this.handleSave} placeholder="What needs a list?" />
       </header>
     );

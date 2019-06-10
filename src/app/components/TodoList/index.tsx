@@ -7,13 +7,13 @@ import { TodoModel } from 'app/models/TodoModel';
 export namespace TodoList {
   export interface Props {
     todos: TodoModel[];
-    actions: TodoActions;
+    todoActions: TodoActions;
   }
 }
 
 export class TodoList extends React.Component<TodoList.Props> {
   renderToggleAll(): JSX.Element | void {
-    const { todos, actions } = this.props;
+    const { todos, todoActions } = this.props;
     if (todos.length > 0) {
       const hasIncompleted = todos.some((todo) => !todo.completed);
       return (
@@ -21,14 +21,14 @@ export class TodoList extends React.Component<TodoList.Props> {
           className={style.toggleAll}
           type="checkbox"
           checked={hasIncompleted}
-          onChange={actions.completeAll}
+          onChange={todoActions.completeAll}
         />
       );
     }
   }
 
   render() {
-    const { todos, actions } = this.props;
+    const { todos, todoActions } = this.props;
     return (
       <section className={style.main}>
         {this.renderToggleAll()}
@@ -37,9 +37,9 @@ export class TodoList extends React.Component<TodoList.Props> {
             <TodoItem
               key={todo.id}
               todo={todo}
-              completeTodo={actions.completeTodo}
-              deleteTodo={actions.deleteTodo}
-              editTodo={actions.editTodo}
+              completeTodo={todoActions.completeTodo}
+              deleteTodo={todoActions.deleteTodo}
+              editTodo={todoActions.editTodo}
             />
           ))}
         </ul>

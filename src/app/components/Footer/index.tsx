@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as style from './style.css';
 import * as classNames from 'classnames';
-import { TodoModel, ListModel } from 'app/models';
+import { TodoModel } from 'app/models';
 
 export const FILTER_TITLES = {
   [TodoModel.Filter.SHOW_ALL]: 'All',
@@ -11,8 +11,8 @@ export const FILTER_TITLES = {
 
 export namespace Footer {
   export interface Props {
-    filter: TodoModel.Filter;
-    activeCount?: number;
+    todoFilter: TodoModel.Filter;
+    todoCount?: number;
     completedCount?: number;
     onClickFilter: (filter: TodoModel.Filter) => any;
     onClickClearCompleted: () => any;
@@ -21,23 +21,23 @@ export namespace Footer {
 
 export class Footer extends React.Component<Footer.Props> {
   static defaultProps: Partial<Footer.Props> = {
-    activeCount: 0,
+    todoCount: 0,
     completedCount: 0
   };
 
   renderTodoCount(): JSX.Element {
-    const { activeCount } = this.props;
-    const itemWord = activeCount === 1 ? 'item' : 'items';
+    const { todoCount } = this.props;
+    const itemWord = todoCount === 1 ? 'item' : 'items';
 
     return (
       <span className={style.count}>
-        <strong>{activeCount || 'No'}</strong> {itemWord} left
+        <strong>{todoCount || 'No'}</strong> {itemWord} left
       </span>
     );
   }
 
   renderFilterLink(filter: TodoModel.Filter): JSX.Element {
-    const { filter: selectedFilter, onClickFilter } = this.props;
+    const { todoFilter: selectedFilter, onClickFilter } = this.props;
 
     return (
       <a
