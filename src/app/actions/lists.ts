@@ -10,7 +10,7 @@ export namespace ListActions {
     CLEAR_COMPLETED = 'CLEAR_COMPLETED'
   }
 
-  export const addList = createAction<PartialPick<ListModel, 'text'>>(Type.ADD_LIST);
+  export const addList = createAction<PartialPick<ListModel, 'name'>>(Type.ADD_LIST);
   export const editList = createAction<PartialPick<ListModel, 'id'>>(Type.EDIT_LIST);
   export const deleteList = createAction<ListModel['id']>(Type.DELETE_LIST);
   export const completeList = createAction<ListModel['id']>(Type.COMPLETE_LIST);

@@ -36,7 +36,7 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
         if (!list || !action || !action.payload) {
           return list;
         }
-        return (list.id || 0) === action.payload.id ? { ...list, text: action.payload.text } : list;
+        return (list.id || 0) === action.payload.id ? { ...list, text: action.payload.name } : list;
       });
     },
     [ListActions.Type.COMPLETE_LIST]: (state, action) => {
