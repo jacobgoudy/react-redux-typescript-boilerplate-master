@@ -8,6 +8,7 @@ import { RootState } from 'app/reducers';
 import { TodoModel } from 'app/models';
 import { omit } from 'app/utils';
 import { TodoHeader, ListHeader, TodoList, Footer } from 'app/components';
+import { ListList } from 'app/components/ListList';
 
 const TODO_FILTER_VALUES = (Object.keys(TodoModel.Filter) as (keyof typeof TodoModel.Filter)[]).map(
   (key) => TodoModel.Filter[key]
@@ -65,7 +66,7 @@ export class App extends React.Component<App.Props> {
   }
 
   render() {
-    const { todos, todoActions, listActions, todoFilter } = this.props;
+    const { lists,todos, todoActions, listActions, todoFilter } = this.props;
     const todoCount = todos.length - todos.filter((todo) => todo.completed).length;
     const filteredTodos = todoFilter ? todos.filter(TODO_FILTER_FUNCTIONS[todoFilter]) : todos;
     const completedCount = todos.reduce((count, todo) => (todo.completed ? count + 1 : count), 0);
@@ -75,7 +76,6 @@ export class App extends React.Component<App.Props> {
     return (
       <div className={style.normal}>
         <ListHeader addList={listActions.addList} />
-
         <TodoHeader addTodo={todoActions.addTodo} />
         <TodoList todos={filteredTodos} todoActions={todoActions} />
         <Footer
