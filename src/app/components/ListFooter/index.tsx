@@ -9,7 +9,7 @@ export const FILTER_TITLES = {
   [ListModel.Filter.SHOW_COMPLETED]: 'Completed'
 };
 
-export namespace Footer {
+export namespace ListFooter {
   export interface Props {
     filter: ListModel.Filter;
     activeCount?: number;
@@ -19,8 +19,8 @@ export namespace Footer {
   }
 }
 
-export class Footer extends React.Component<Footer.Props> {
-  static defaultProps: Partial<Footer.Props> = {
+export class Footer extends React.Component<ListFooter.Props> {
+  static defaultProps: Partial<ListFooter.Props> = {
     activeCount: 0,
     completedCount: 0
   };
