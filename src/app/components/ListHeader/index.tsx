@@ -8,15 +8,15 @@ export namespace ListHeader {
   }
 }
 
-export class ListHeader extends React.Component<Header.Props> {
+export class ListHeader extends React.Component<ListHeader.Props> {
   constructor(props: ListHeader.Props, context?: any) {
     super(props, context);
     this.handleSave = this.handleSave.bind(this);
   }
 
-  handleSave(text: string) {
-    if (text.length) {
-      this.props.addList({ text });
+  handleSave(name: string) {
+    if (name.length) {
+      this.props.addList({ name });
     }
   }
 
