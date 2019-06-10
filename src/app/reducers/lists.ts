@@ -1,12 +1,12 @@
 import { handleActions } from 'redux-actions';
 import { RootState } from './state';
-import { ListActions } from 'app/actions/list';
+import { ListActions } from 'app/actions/lists';
 import { ListModel } from 'app/models/ListModel';
 
 const initialState: RootState.ListState = [
   {
     id: 1,
-    text: 'Use Redux',
+    name: 'Use Redux',
     list: [],
     completed: false
   }
@@ -15,13 +15,13 @@ const initialState: RootState.ListState = [
 export const listReducer = handleActions<RootState.ListState, ListModel>(
   {
     [ListActions.Type.ADD_LIST]: (state, action) => {
-        if (action.payload && action.payload.text) {
+        if (action.payload && action.payload.name) {
           return [
             {
               id: state.reduce((max, list) => Math.max(list.id || 1, max), 0) + 1,
               completed: false,
               list: action.payload.list,
-              text: action.payload.text
+              name: action.payload.name
             },
             ...state
           ];
