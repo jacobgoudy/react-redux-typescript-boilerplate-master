@@ -1,20 +1,20 @@
 import * as React from 'react';
 import * as style from './style.css';
 import * as classNames from 'classnames';
-import { TodoModel, ListModel } from 'app/models';
+import { ListModel } from 'app/models';
 
 export const FILTER_TITLES = {
-  [TodoModel.Filter.SHOW_ALL]: 'All',
-  [TodoModel.Filter.SHOW_ACTIVE]: 'Active',
-  [TodoModel.Filter.SHOW_COMPLETED]: 'Completed'
+  [ListModel.Filter.SHOW_ALL]: 'All',
+  [ListModel.Filter.SHOW_ACTIVE]: 'Active',
+  [ListModel.Filter.SHOW_COMPLETED]: 'Completed'
 };
 
 export namespace Footer {
   export interface Props {
-    filter: TodoModel.Filter;
+    filter: ListModel.Filter;
     activeCount?: number;
     completedCount?: number;
-    onClickFilter: (filter: TodoModel.Filter) => any;
+    onClickFilter: (filter: ListModel.Filter) => any;
     onClickClearCompleted: () => any;
   }
 }
@@ -25,7 +25,7 @@ export class Footer extends React.Component<Footer.Props> {
     completedCount: 0
   };
 
-  renderTodoCount(): JSX.Element {
+  renderListCount(): JSX.Element {
     const { activeCount } = this.props;
     const itemWord = activeCount === 1 ? 'item' : 'items';
 
@@ -36,7 +36,7 @@ export class Footer extends React.Component<Footer.Props> {
     );
   }
 
-  renderFilterLink(filter: TodoModel.Filter): JSX.Element {
+  renderFilterLink(filter: ListModel.Filter): JSX.Element {
     const { filter: selectedFilter, onClickFilter } = this.props;
 
     return (
@@ -65,10 +65,10 @@ export class Footer extends React.Component<Footer.Props> {
   render() {
     return (
       <footer className={style.normal}>
-        {this.renderTodoCount()}
+        {this.renderListCount()}
         <ul className={style.filters}>
-          {(Object.keys(TodoModel.Filter) as (keyof typeof TodoModel.Filter)[]).map((key) => (
-            <li key={key} children={this.renderFilterLink(TodoModel.Filter[key])} />
+          {(Object.keys(ListModel.Filter) as (keyof typeof ListModel.Filter)[]).map((key) => (
+            <li key={key} children={this.renderFilterLink(ListModel.Filter[key])} />
           ))}
         </ul>
         {this.renderClearButton()}

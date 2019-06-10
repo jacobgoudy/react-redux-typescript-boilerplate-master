@@ -7,11 +7,7 @@ import { TodoActions } from 'app/actions';
 import { RootState } from 'app/reducers';
 import { TodoModel } from 'app/models';
 import { omit } from 'app/utils';
-<<<<<<< HEAD
-import { TodoList, Header, Footer } from 'app/components';
-=======
 import { Header, TodoList, Footer } from 'app/components';
->>>>>>> 3a8b6c20a339982fd632ad4ab99900b3d3bc6817
 
 const FILTER_VALUES = (Object.keys(TodoModel.Filter) as (keyof typeof TodoModel.Filter)[]).map(
   (key) => TodoModel.Filter[key]
