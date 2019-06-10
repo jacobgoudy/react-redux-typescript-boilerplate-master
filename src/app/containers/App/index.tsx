@@ -66,7 +66,7 @@ export class App extends React.Component<App.Props> {
   }
 
   render() {
-    const { lists,todos, todoActions, listActions, todoFilter } = this.props;
+    const { todos, todoActions, listActions, todoFilter } = this.props;
     const todoCount = todos.length - todos.filter((todo) => todo.completed).length;
     const filteredTodos = todoFilter ? todos.filter(TODO_FILTER_FUNCTIONS[todoFilter]) : todos;
     const completedCount = todos.reduce((count, todo) => (todo.completed ? count + 1 : count), 0);
