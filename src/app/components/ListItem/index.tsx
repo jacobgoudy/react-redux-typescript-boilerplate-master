@@ -15,6 +15,7 @@ export namespace ListItem {
 
   export interface State {
     editing: boolean;
+    isSelected: boolean;
   }
 }
 
@@ -22,6 +23,10 @@ export class ListItem extends React.Component<ListItem.Props, ListItem.State> {
   constructor(props: ListItem.Props, context?: any) {
     super(props, context);
     this.state = { editing: false };
+  }
+
+  handleSingleClick() {
+    this.setState({ isSelected: true});
   }
 
   handleDoubleClick() {

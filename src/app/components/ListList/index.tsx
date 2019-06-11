@@ -15,7 +15,7 @@ export class ListList extends React.Component<ListList.Props> {
   renderToggleAll(): JSX.Element | void {
     const { lists } = this.props;
     if (lists.length > 0) {
-      const hasIncompleted = lists.some((lists) => !lists.completed);
+      const hasIncompleted = lists.some((list) => !list.completed);
       return (
         <input
           className={style.toggleAll}
@@ -27,7 +27,7 @@ export class ListList extends React.Component<ListList.Props> {
   }
 
   render() {
-    const { lists,listActions } = this.props;
+    const { lists, listActions } = this.props;
     return (
       <section className={style.main}>
         {this.renderToggleAll()}

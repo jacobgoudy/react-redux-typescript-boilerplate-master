@@ -8,4 +8,5 @@ export interface ListModel {
   name: string;
   list: TodoModel[];
   completed: boolean;
+  isSelected: boolean;
 }

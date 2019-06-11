@@ -8,7 +8,8 @@ const initialState: RootState.ListState = [
     id: 1,
     name: 'Use Redux',
     list: [],
-    completed: false
+    completed: false,
+    isSelected: false
   }
 ];
 
@@ -21,7 +22,8 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
               id: state.reduce((max, list) => Math.max(list.id || 1, max), 0) + 1,
               completed: false,
               list: action.payload.list,
-              name: action.payload.name
+              name: action.payload.name,
+              isSelected: true
             },
             ...state
           ];
@@ -44,7 +46,7 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
       list.id === (action.payload as any) ? { ...list, completed: !list.completed } : list
       );
     },
-    [ListActions.Type.CLEAR_COMPLETED]: (state, action) => {
+    [ListActions.Type.SELECT_LIST]: (state, action) => {
       return state.filter((list) => list.completed === false);
     }
   },
