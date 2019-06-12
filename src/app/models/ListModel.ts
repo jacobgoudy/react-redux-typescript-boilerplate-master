@@ -1,4 +1,4 @@
-//import { TodoModel } from ".";
+import { TodoModel } from ".";
 
 /** TodoMVC model definitions **/
 
@@ -6,7 +6,7 @@
 export interface ListModel {
   id: number;
   name: string;
-  //list: TodoModel[];
+  list: TodoModel[];
   completed: boolean;
-  //isSelected: boolean;
+  isSelected: boolean;
 }

@@ -22,7 +22,7 @@ export namespace ListItem {
 export class ListItem extends React.Component<ListItem.Props, ListItem.State> {
   constructor(props: ListItem.Props, context?: any) {
     super(props, context);
-    this.state = { editing: false };
+    this.state = { editing: false, isSelected:true };
   }
 
   handleSingleClick() {

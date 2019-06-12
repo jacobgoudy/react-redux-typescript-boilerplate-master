@@ -5,7 +5,7 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { RouteComponentProps } from 'react-router';
 import { TodoActions, ListActions } from 'app/actions';
 import { RootState } from 'app/reducers';
-import { TodoModel } from 'app/models';
+import { TodoModel, ListModel } from 'app/models';
 import { omit } from 'app/utils';
 import { TodoHeader, ListHeader, TodoList, Footer } from 'app/components';
 import { ListList } from 'app/components/ListList';
@@ -14,13 +14,11 @@ const TODO_FILTER_VALUES = (Object.keys(TodoModel.Filter) as (keyof typeof TodoM
   (key) => TodoModel.Filter[key]
 );
 
-const TODO_FILTER_FUNCTIONS: Record<TodoModel.Filter, (todo: TodoModel) => boolean> = {
+const TODO_FILTER_FUNCTIONS: Record<TodoModel.Filter, (todo: TodoModel)=> boolean> = {
   [TodoModel.Filter.SHOW_ALL]: () => true,
   [TodoModel.Filter.SHOW_ACTIVE]: (todo) => !todo.completed,
   [TodoModel.Filter.SHOW_COMPLETED]: (todo) => todo.completed
 };
-
-
 
 export namespace App {
   export interface Props extends RouteComponentProps<void> {
@@ -45,13 +43,14 @@ export namespace App {
 )
 export class App extends React.Component<App.Props> {
   static defaultProps: Partial<App.Props> = {
-    todoFilter: TodoModel.Filter.SHOW_ALL
+    todoFilter: TodoModel.Filter.SHOW_ALL,
   };
 
   constructor(props: App.Props, context?: any) {
     super(props, context);
     this.handleClearCompleted = this.handleClearCompleted.bind(this);
     this.handleFilterChange = this.handleFilterChange.bind(this);
+    this.handleSelectedChange = this.handleSelectedChange.bind(this);
   }
 
   handleClearCompleted(): void {
@@ -65,14 +64,22 @@ export class App extends React.Component<App.Props> {
     this.props.history.push(`#${todoFilter}`);
   }
 
+  handleSelectedChange(lists: ListModel):void{
+    this.props.history.push(`#${lists.isSelected}`);
+  }
+
   render() {
-    const { lists, todos, todoActions, listActions, todoFilter } = this.props;
+    var { lists, todos, todoActions, listActions, todoFilter } = this.props;
+    var selectedList = lists.find(x => x.isSelected === true);
+    //const selectedTodos: TodoModel[] = selectedList;
+    if(selectedList != undefined)
+      var selectedTodos = selectedList.list; 
+    else
+      var selectedTodos:TodoModel[] = [];
+    todos = selectedTodos;
     const todoCount = todos.length - todos.filter((todo) => todo.completed).length;
     const filteredTodos = todoFilter ? todos.filter(TODO_FILTER_FUNCTIONS[todoFilter]) : todos;
     const completedCount = todos.reduce((count, todo) => (todo.completed ? count + 1 : count), 0);
-
-    //const listCount = lists.length - lists.filter((list) => list.completed).length;
-
     return (
       <div className={style.normal}>
         <ListHeader addList={listActions.addList} />

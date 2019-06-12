@@ -3,13 +3,7 @@ import { RootState } from './state';
 import { TodoActions } from 'app/actions/todos';
 import { TodoModel } from 'app/models';
 
-const initialState: RootState.TodoState = [
-  {
-    id: 1,
-    text: 'Use Redux',
-    completed: false
-  }
-];
+const initialState: RootState.TodoState = [];
 
 export const todoReducer = handleActions<RootState.TodoState, TodoModel>(
   {
