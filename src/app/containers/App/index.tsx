@@ -74,7 +74,6 @@ export class App extends React.Component<App.Props> {
   render() {
     var { lists, todos, todoActions, listActions, todoFilter } = this.props;
     var selectedList = lists.find(x => x.isSelected === true);
-    //const selectedTodos: TodoModel[] = selectedList;
     if(selectedList != undefined)
       var selectedTodos = selectedList.list;
     else
