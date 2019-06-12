@@ -33,10 +33,10 @@ export namespace App {
 }
 
 @connect(
-  (state: RootState, ownProps): Pick<App.Props, 'todos' | 'todoFilter'> => {
+  (state: RootState, ownProps): Pick<App.Props, 'todos' | 'todoFilter' | 'lists'> => {
     const hash = ownProps.location && ownProps.location.hash.replace('#', '');
     const todoFilter = TODO_FILTER_VALUES.find((value) => value === hash) || TodoModel.Filter.SHOW_ALL;
-    return { todos: state.todos, todoFilter };
+    return { lists: state.lists, todos: state.todos, todoFilter };
   },
   (dispatch: Dispatch): Pick<App.Props, 'todoActions' | 'listActions'> => ({
     todoActions: bindActionCreators(omit(TodoActions, 'Type'), dispatch),
