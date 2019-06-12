@@ -24,7 +24,11 @@ export namespace ListItem {
 export class ListItem extends React.Component<ListItem.Props, ListItem.State> {
   constructor(props: ListItem.Props, context?: any) {
     super(props, context);
+<<<<<<< HEAD
     this.state = { editing: false, isSelected: true };
+=======
+    this.state = { editing: false, isSelected:true };
+>>>>>>> 0be4477909cf9f148ac10f7c0d2779a77ac29321
   }
 
   handleSingleClick() {

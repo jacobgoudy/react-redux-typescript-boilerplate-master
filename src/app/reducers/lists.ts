@@ -13,10 +13,21 @@ const initialState: RootState.ListState = [
     completed: false
 =======
     name: 'Use Redux',
-    //list: [],
+    list: [{id: 1, text:'temp', completed:false}, {id:2, text:'fuck', completed:false}],
     completed: false,
+<<<<<<< HEAD
     //isSelected: false
 >>>>>>> a56cdf5ccdb97b809d7c1262794a45e3f6d47fa8
+=======
+    isSelected: true
+  }
+  ,{
+    id:2,
+    name:'Use Java',
+    list: [{id: 1, text:'Haskell', completed:false}, {id:2, text:'Python', completed:false}],
+    completed: false,
+    isSelected: false
+>>>>>>> 0be4477909cf9f148ac10f7c0d2779a77ac29321
   }
 ];
 
@@ -28,9 +39,9 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
             {
               id: state.reduce((max, list) => Math.max(list.id || 1, max), 0) + 1,
               completed: false,
-              //list: action.payload.list,
+              list: [],
               name: action.payload.name,
-              //isSelected: true
+              isSelected: true
             },
             ...state
           ];
@@ -53,9 +64,9 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
       list.id === (action.payload as any) ? { ...list, completed: !list.completed } : list
       );
     },
-    [ListActions.Type.SELECT_LIST]: (state, action) => {
-      return state.filter((list) => list.completed === false);
-    }
+    // [ListActions.Type.SELECT_LIST]: (state, action) => {
+    //   return state.filter((list) => list.completed === false);
+    // }
   },
   initialState
 );
