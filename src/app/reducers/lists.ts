@@ -2,14 +2,14 @@ import { handleActions } from 'redux-actions';
 import { RootState } from './state';
 import { ListActions } from 'app/actions/lists';
 import { ListModel } from 'app/models/ListModel';
+import { TodoModel } from 'app/models/TodoModel';
 
 const initialState: RootState.ListState = [
   {
     id: 1,
-    name: 'Use Redux',
     list: [],
-    completed: false,
-    isSelected: false
+    name: 'Use Redux',
+    completed: false
   }
 ];
 

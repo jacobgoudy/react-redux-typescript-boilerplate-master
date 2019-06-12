@@ -3,7 +3,8 @@ import * as classNames from 'classnames';
 import * as style from './style.css';
 import { ListModel } from 'app/models';
 import { ListActions } from 'app/actions';
-import { ListTextInput } from 'app/components'
+import { ListTextInput } from 'app/components';
+import { TodoList } from 'app/components';
 
 export namespace ListItem {
   export interface Props {
@@ -11,6 +12,7 @@ export namespace ListItem {
     editList: typeof ListActions.editList;
     deleteList: typeof ListActions.deleteList;
     completeList: typeof ListActions.completeList;
+    selectList: typeof ListActions.selectList;
   }
 
   export interface State {
@@ -22,7 +24,7 @@ export namespace ListItem {
 export class ListItem extends React.Component<ListItem.Props, ListItem.State> {
   constructor(props: ListItem.Props, context?: any) {
     super(props, context);
-    this.state = { editing: false };
+    this.state = { editing: false, isSelected: true };
   }
 
   handleSingleClick() {
@@ -54,7 +56,11 @@ export class ListItem extends React.Component<ListItem.Props, ListItem.State> {
           onSave={(name: string) => list.id && this.handleSave(list.id, name)}
         />
       );
-    } else {
+    }
+    //else if (this.state.isSelected) {
+
+    //}
+    else {
       element = (
         <div className={style.view}>
           <input

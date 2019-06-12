@@ -33,10 +33,10 @@ export namespace App {
 }
 
 @connect(
-  (state: RootState, ownProps): Pick<App.Props, 'todos' | 'todoFilter'> => {
+  (state: RootState, ownProps): Pick<App.Props, 'todos' | 'todoFilter' | 'lists'> => {
     const hash = ownProps.location && ownProps.location.hash.replace('#', '');
     const todoFilter = TODO_FILTER_VALUES.find((value) => value === hash) || TodoModel.Filter.SHOW_ALL;
-    return { todos: state.todos, todoFilter };
+    return { todos: state.todos, lists: state.lists, todoFilter };
   },
   (dispatch: Dispatch): Pick<App.Props, 'todoActions' | 'listActions'> => ({
     todoActions: bindActionCreators(omit(TodoActions, 'Type'), dispatch),
@@ -76,7 +76,11 @@ export class App extends React.Component<App.Props> {
     return (
       <div className={style.normal}>
         <ListHeader addList={listActions.addList} />
-        <ListList lists={lists} listActions={listActions} />
+        <select name="Lists">
+          {lists.map((list) => {
+            return <option value={list.name}>{list.name}</option>;
+          })}
+        </select>
         <TodoHeader addTodo={todoActions.addTodo} />
         <TodoList todos={filteredTodos} todoActions={todoActions} />
         <Footer
