@@ -7,9 +7,16 @@ import { TodoModel } from 'app/models/TodoModel';
 const initialState: RootState.ListState = [
   {
     id: 1,
+<<<<<<< HEAD
     list: [],
     name: 'Use Redux',
     completed: false
+=======
+    name: 'Use Redux',
+    //list: [],
+    completed: false,
+    //isSelected: false
+>>>>>>> a56cdf5ccdb97b809d7c1262794a45e3f6d47fa8
   }
 ];
 
@@ -21,9 +28,9 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
             {
               id: state.reduce((max, list) => Math.max(list.id || 1, max), 0) + 1,
               completed: false,
-              list: action.payload.list,
+              //list: action.payload.list,
               name: action.payload.name,
-              isSelected: true
+              //isSelected: true
             },
             ...state
           ];

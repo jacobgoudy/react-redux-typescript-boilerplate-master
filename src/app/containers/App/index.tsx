@@ -36,7 +36,11 @@ export namespace App {
   (state: RootState, ownProps): Pick<App.Props, 'todos' | 'todoFilter' | 'lists'> => {
     const hash = ownProps.location && ownProps.location.hash.replace('#', '');
     const todoFilter = TODO_FILTER_VALUES.find((value) => value === hash) || TodoModel.Filter.SHOW_ALL;
+<<<<<<< HEAD
     return { todos: state.todos, lists: state.lists, todoFilter };
+=======
+    return { lists: state.lists, todos: state.todos, todoFilter };
+>>>>>>> a56cdf5ccdb97b809d7c1262794a45e3f6d47fa8
   },
   (dispatch: Dispatch): Pick<App.Props, 'todoActions' | 'listActions'> => ({
     todoActions: bindActionCreators(omit(TodoActions, 'Type'), dispatch),
