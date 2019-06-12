@@ -13,7 +13,7 @@ export namespace ListList {
 
 export class ListList extends React.Component<ListList.Props> {
   renderToggleAll(): JSX.Element | void {
-    const { lists, listActions } = this.props;
+    const { lists } = this.props;
     if (lists.length > 0) {
       const hasIncompleted = lists.some((list) => !list.completed);
       return (
