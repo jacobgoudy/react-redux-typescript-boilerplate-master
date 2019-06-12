@@ -67,24 +67,29 @@ export class App extends React.Component<App.Props> {
     this.props.history.push(`#${lists.isSelected}`);
   }
 
+  handleChange(event) {
+    this.setState({todos: this.props.lists[event.currentTarget.value].list});
+  }
+
   render() {
     var { lists, todos, todoActions, listActions, todoFilter } = this.props;
     var selectedList = lists.find(x => x.isSelected === true);
     //const selectedTodos: TodoModel[] = selectedList;
     if(selectedList != undefined)
-      var selectedTodos = selectedList.list; 
+      var selectedTodos = selectedList.list;
     else
       var selectedTodos:TodoModel[] = [];
     todos = selectedTodos;
     const todoCount = todos.length - todos.filter((todo) => todo.completed).length;
     const filteredTodos = todoFilter ? todos.filter(TODO_FILTER_FUNCTIONS[todoFilter]) : todos;
     const completedCount = todos.reduce((count, todo) => (todo.completed ? count + 1 : count), 0);
+
     return (
       <div className={style.normal}>
         <ListHeader addList={listActions.addList} />
-        <select name="Lists">
+        <select name="Lists" onChange={this.handleChange}>
           {lists.map((list) => {
-            return <option value={list.name}>{list.name}</option>;
+            return <option value={list.id}>{list.name}</option>;
           })}
         </select>
         <TodoHeader addTodo={todoActions.addTodo} />

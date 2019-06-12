@@ -4,6 +4,7 @@ import * as style from './style.css';
 import { ListModel } from 'app/models';
 import { ListActions } from 'app/actions';
 import { ListTextInput } from 'app/components';
+import { TodoList } from 'app/components';
 
 export namespace ListItem {
   export interface Props {
@@ -23,7 +24,7 @@ export namespace ListItem {
 export class ListItem extends React.Component<ListItem.Props, ListItem.State> {
   constructor(props: ListItem.Props, context?: any) {
     super(props, context);
-    this.state = { editing: false, isSelected:true };
+    this.state = { editing: false, isSelected: true };
   }
 
   handleSingleClick() {
