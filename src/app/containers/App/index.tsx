@@ -8,6 +8,7 @@ import { RootState } from 'app/reducers';
 import { TodoModel, ListModel } from 'app/models';
 import { omit } from 'app/utils';
 import { TodoHeader, ListHeader, TodoList, Footer } from 'app/components';
+import { number } from 'prop-types';
 
 const TODO_FILTER_VALUES = (Object.keys(TodoModel.Filter) as (keyof typeof TodoModel.Filter)[]).map(
   (key) => TodoModel.Filter[key]
@@ -76,15 +77,15 @@ export class App extends React.Component<App.Props> {
 
     this.setState({ selectedValue: selectedID });
     this.setState( { selectedValue: selectedID }, () => {
-      console.log(this.state.selectedValue);//this will print the updated state value
+      //console.log(this.state.selectedValue);//this will print the updated state value
 
 
       this.props.lists.map((list) => {
         var listID = list.id as number;
         console.log(this.state);
         console.log("list ID",listID);
-        console.log("selectedID",selectedID);
-        if ( selectedID === listID ) {
+        console.log("selectedID",+selectedID);
+        if ( +selectedID === listID ) {
           list.isSelected = true;
           console.log("trigger true");
         }
