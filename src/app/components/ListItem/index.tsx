@@ -4,7 +4,6 @@ import * as style from './style.css';
 import { ListModel } from 'app/models';
 import { ListActions } from 'app/actions';
 import { ListTextInput } from 'app/components';
-import { TodoList } from 'app/components';
 
 export namespace ListItem {
   export interface Props {
@@ -57,9 +56,6 @@ export class ListItem extends React.Component<ListItem.Props, ListItem.State> {
         />
       );
     }
-    //else if (this.state.isSelected) {
-
-    //}
     else {
       element = (
         <div className={style.view}>

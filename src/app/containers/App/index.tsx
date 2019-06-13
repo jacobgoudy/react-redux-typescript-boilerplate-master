@@ -71,25 +71,14 @@ export class App extends React.Component<App.Props> {
 
   handleChange(event: React.FormEvent) {
     var selectedID = ((event.target) as any).value;
-    //console.log("selectedID was set to: ",selectedID);
-    //var selectedIDNumber = selectedID as number;
-    //console.log("selectedID was set to: ",selectedIDNumber);
     this.setState({ selectedValue: selectedID });
     this.setState( { selectedValue: selectedID }, () => {
-      //console.log(this.state.selectedValue);//this will print the updated state value
       this.props.lists.map((list) => {
         var listID = list.id as number;
-        //console.log(this.state);
-        //console.log("list ID",listID);
-        //console.log("selectedID",+selectedID);
-        if ( +selectedID === listID ) {
+        if ( +selectedID === listID )
           list.isSelected = true;
-          //console.log("trigger true");
-        }
-        else {
+        else 
           list.isSelected = false;
-          //console.log("trigger false");
-        }
         this.handleSelectedChange(list);
       })
    });
@@ -101,7 +90,6 @@ export class App extends React.Component<App.Props> {
     if(selectedList != undefined)
       var selectedTodos = selectedList.list;
     else
-      //selectedList: ListModel =
       var selectedTodos:TodoModel[] = [];
     todos = selectedTodos;
     const todoCount = todos.length - todos.filter((todo) => todo.completed).length;

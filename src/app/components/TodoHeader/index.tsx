@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { TodoTextInput } from '../TodoTextInput';
 import { TodoActions } from 'app/actions/todos';
-import { ListModel, TodoModel } from 'app/models';
+import { ListModel } from 'app/models';
 
 export namespace TodoHeader {
   export interface Props {
@@ -22,9 +22,9 @@ export class TodoHeader extends React.Component<TodoHeader.Props> {
     }
   }
 
-  addToList(todo: TodoModel) {
-
-  }
+  // addToList(todo: TodoModel) {
+      
+  // }
 
   render() {
     return (

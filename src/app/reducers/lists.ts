@@ -9,7 +9,6 @@ const initialState: RootState.ListState = [
     name: 'Use Redux',
     list: [{id: 1, text:'temp', completed:false}, {id:2, text:'frick', completed:false}],
     completed: false,
-    //isSelected: false
     isSelected: true
   }
   ,{
