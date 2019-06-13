@@ -26,6 +26,7 @@ export namespace App {
     todoActions: TodoActions;
     listActions: ListActions;
     todoFilter: TodoModel.Filter;
+    selectedValue: number;
   }
 }
 
@@ -67,8 +68,18 @@ export class App extends React.Component<App.Props> {
     this.props.history.push(`#${lists.isSelected}`);
   }
 
-  handleChange(event) {
-    this.setState({todos: this.props.lists[event.currentTarget.value].list});
+  handleChange(event: React.FormEvent) {
+    var selectedID = ((event.target) as any).value;
+    this.setState({ selectedValue: selectedID });
+
+    this.props.lists.map((list) => {
+      if ( this.props.selectedValue === list.id) {
+        list.isSelected = true;
+      }
+      else {
+        list.isSelected = false;
+      }
+    })
   }
 
   render() {
@@ -86,7 +97,7 @@ export class App extends React.Component<App.Props> {
     return (
       <div className={style.normal}>
         <ListHeader addList={listActions.addList} />
-        <select name="Lists" onChange={this.handleChange}>
+        <select name="Lists" onChange={ e => this.handleChange(e) } value={ this.props.selectedValue }>
           {lists.map((list) => {
             return <option value={list.id}>{list.name}</option>;
           })}
