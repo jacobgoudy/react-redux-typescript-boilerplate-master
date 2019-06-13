@@ -8,7 +8,6 @@ import { RootState } from 'app/reducers';
 import { TodoModel, ListModel } from 'app/models';
 import { omit } from 'app/utils';
 import { TodoHeader, ListHeader, TodoList, Footer } from 'app/components';
-import { number } from 'prop-types';
 
 const TODO_FILTER_VALUES = (Object.keys(TodoModel.Filter) as (keyof typeof TodoModel.Filter)[]).map(
   (key) => TodoModel.Filter[key]
@@ -52,6 +51,7 @@ export class App extends React.Component<App.Props> {
     this.handleClearCompleted = this.handleClearCompleted.bind(this);
     this.handleFilterChange = this.handleFilterChange.bind(this);
     this.handleSelectedChange = this.handleSelectedChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleClearCompleted(): void {
@@ -74,12 +74,9 @@ export class App extends React.Component<App.Props> {
     //console.log("selectedID was set to: ",selectedID);
     var selectedIDNumber = selectedID as number;
     console.log("selectedID was set to: ",selectedIDNumber);
-
     this.setState({ selectedValue: selectedID });
     this.setState( { selectedValue: selectedID }, () => {
       //console.log(this.state.selectedValue);//this will print the updated state value
-
-
       this.props.lists.map((list) => {
         var listID = list.id as number;
         console.log(this.state);
@@ -93,22 +90,9 @@ export class App extends React.Component<App.Props> {
           list.isSelected = false;
           console.log("trigger false");
         }
-
-        console.log(list.isSelected);
+        this.handleSelectedChange(list);
       })
    });
-
-    // this.props.lists.map((list) => {
-    //
-    //   console.log(this.state);
-    //   console.log(list.id);
-    //   if ( this.state.selectedValue === list.id) {
-    //     list.isSelected = true;
-    //   }
-    //   else {
-    //     list.isSelected = false;
-    //   }
-    // })
   }
 
   render() {
@@ -122,7 +106,7 @@ export class App extends React.Component<App.Props> {
     const todoCount = todos.length - todos.filter((todo) => todo.completed).length;
     const filteredTodos = todoFilter ? todos.filter(TODO_FILTER_FUNCTIONS[todoFilter]) : todos;
     const completedCount = todos.reduce((count, todo) => (todo.completed ? count + 1 : count), 0);
-
+    console.log(todos);
     return (
       <div className={style.normal}>
         <ListHeader addList={listActions.addList} />
