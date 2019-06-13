@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { TodoTextInput } from '../TodoTextInput';
 import { TodoActions } from 'app/actions/todos';
+import { ListModel, TodoModel } from 'app/models';
 
 export namespace TodoHeader {
   export interface Props {
     addTodo: typeof TodoActions.addTodo;
+    currentList: ListModel;
   }
 }
 
@@ -18,6 +20,10 @@ export class TodoHeader extends React.Component<TodoHeader.Props> {
     if (text.length) {
       this.props.addTodo({ text });
     }
+  }
+
+  addToList(todo: TodoModel) {
+
   }
 
   render() {
