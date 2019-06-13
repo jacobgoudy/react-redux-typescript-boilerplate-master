@@ -70,16 +70,44 @@ export class App extends React.Component<App.Props> {
 
   handleChange(event: React.FormEvent) {
     var selectedID = ((event.target) as any).value;
-    this.setState({ selectedValue: selectedID });
+    //console.log("selectedID was set to: ",selectedID);
+    var selectedIDNumber = selectedID as number;
+    console.log("selectedID was set to: ",selectedIDNumber);
 
-    this.props.lists.map((list) => {
-      if ( this.props.selectedValue === list.id) {
-        list.isSelected = true;
-      }
-      else {
-        list.isSelected = false;
-      }
-    })
+    this.setState({ selectedValue: selectedID });
+    this.setState( { selectedValue: selectedID }, () => {
+      console.log(this.state.selectedValue);//this will print the updated state value
+
+
+      this.props.lists.map((list) => {
+        var listID = list.id as number;
+        console.log(this.state);
+        console.log("list ID",listID);
+        console.log("selectedID",selectedID);
+        if ( selectedID === listID ) {
+          list.isSelected = true;
+          console.log("trigger true");
+        }
+        else {
+          list.isSelected = false;
+          console.log("trigger false");
+        }
+
+        console.log(list.isSelected);
+      })
+   });
+
+    // this.props.lists.map((list) => {
+    //
+    //   console.log(this.state);
+    //   console.log(list.id);
+    //   if ( this.state.selectedValue === list.id) {
+    //     list.isSelected = true;
+    //   }
+    //   else {
+    //     list.isSelected = false;
+    //   }
+    // })
   }
 
   render() {
