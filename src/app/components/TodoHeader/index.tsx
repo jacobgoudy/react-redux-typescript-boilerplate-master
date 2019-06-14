@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { TodoTextInput } from '../TodoTextInput';
-//import { TodoActions } from 'app/actions/todos';
 import { ListModel } from 'app/models';
 import { ListActions } from 'app/actions';
 
@@ -17,15 +16,20 @@ export class TodoHeader extends React.Component<TodoHeader.Props> {
     this.handleSave = this.handleSave.bind(this);
   }
 
+  //handleSave(text: string) {
+    //if (text.length) {
+      //this.props.addTodo({name});
+      
+    //}
+  //}
+
   handleSave(text: string) {
-    if (text.length) {
-      this.props.addTodo(+text);
+    //var text = ((event.target) as any).value;
+    var name: string = text as string;
+    if (name.length) {
+      this.props.addTodo({name});
     }
   }
-
-  // addToList(todo: TodoModel) {
-      
-  // }
 
   render() {
     return (
