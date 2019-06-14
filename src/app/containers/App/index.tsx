@@ -77,7 +77,7 @@ export class App extends React.Component<App.Props> {
         var listID = list.id as number;
         if ( +selectedID === listID )
           list.isSelected = true;
-        else 
+        else
           list.isSelected = false;
         this.handleSelectedChange(list);
       })
@@ -100,7 +100,7 @@ export class App extends React.Component<App.Props> {
     return (
       <div className={style.normal}>
         <ListHeader addList={listActions.addList} />
-        <select name="Lists" onChange={ e => this.handleChange(e) } value={ this.props.selectedValue }>
+        <select name="Lists" style={style.select} onChange={ e => this.handleChange(e) } value={ this.props.selectedValue }>
           {lists.map((list) => {
             return <option value={list.id}>{list.name}</option>;
           })}
