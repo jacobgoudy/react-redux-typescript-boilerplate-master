@@ -57,26 +57,33 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
       let newState = state;
       var index = newState.findIndex(x => x.isSelected === true);
       (newState[index].list.push({
-        text: 'action.payload.name as any',
-        id: newState[index].list.reduce((max, list) => Math.max(list.id || 1, max), 0) + 1,
+        text: action.payload.name as any,
+        id: state.reduce((max, list) => Math.max(list.id || 1, max), 0) + 1,
         completed:false
       }));
-      console.log("add");
       return newState;
     },
     [ListActions.Type.COMPLETE_TODO]: (state, action) => {
-       //let newState = state;
-      // console.log(newState);
-      // var index = newState.findIndex(x => x.isSelected === true);
-      // console.log(newState[index].list[(action.payload.id)-1].completed = !newState[index].list[action.payload-1].completed);
-      // return newState;
-      console.log("complete");
-      return state;
+      let newState = state;
+      console.log(newState);
+      var index = newState.findIndex(x => x.isSelected === true);
+      console.log(newState[index].list[(action.payload)-1].completed = !newState[index].list[action.payload-1].completed);
+      return newState;
     },
-    [ListActions.Type.DELETE_TODO]: (state, action) => {
-      console.log("delete");
-      return state;
+    // [ListActions.Type.DELETE_TODO]: (state, action) => {
+    //   console.log("help");
+    //   return state;
+    // },
+    [ListActions.Type.EDIT_LIST]: (state, action) => {
+      let newState = state;
+      var index = newState.findIndex(x => x.isSelected === true);
+      console.log(action.payload);
+      return newState;
     },
+    // [ListActions.Type.COMPLETE_ALL]: (state, action) => {
+    //   let newState = state;
+    //   return state.map((todo) => ({ ...todo, completed: true }));
+    // },
   },
   initialState
 );

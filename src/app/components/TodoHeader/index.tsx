@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { TodoTextInput } from '../TodoTextInput';
-import { ListModel } from 'app/models';
 import { ListActions } from 'app/actions';
 
 export namespace TodoHeader {

@@ -4,7 +4,6 @@ import * as style from './style.css';
 import { TodoModel } from 'app/models';
 import { ListActions } from 'app/actions/lists';
 import { TodoTextInput } from '../TodoTextInput';
-import { TodoActions } from 'app/actions';
 
 export namespace TodoItem {
   export interface Props {
@@ -40,7 +39,6 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
 
   render() {
     const { todo, completeTodo, deleteTodo } = this.props;
-
     let element;
     if (this.state.editing) {
       element = (

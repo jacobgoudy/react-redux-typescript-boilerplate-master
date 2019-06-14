@@ -14,7 +14,6 @@ export namespace TodoList {
 export class TodoList extends React.Component<TodoList.Props> {
   renderToggleAll(): JSX.Element | void {
     const { todos, todoActions } = this.props;
-    console.log(todoActions);
     if (todos.length > 0) {
       const hasIncompleted = todos.some((todo) => !todo.completed);
       return (
