@@ -86,6 +86,7 @@ export class App extends React.Component<App.Props> {
 
   render() {
     var { lists, todos, todoActions, listActions, todoFilter } = this.props;
+    console.log(todos);
     var selectedList = lists.find(x => x.isSelected === true);
     if(selectedList != undefined)
       var selectedTodos = selectedList.list;
@@ -104,7 +105,7 @@ export class App extends React.Component<App.Props> {
             return <option value={list.id}>{list.name}</option>;
           })}
         </select>
-        <TodoHeader addTodo={todoActions.addTodo} currentList={selectedList as ListModel}/>
+        <TodoHeader addTodo={listActions.addTodo} currentList={selectedList as ListModel}/>
         <TodoList todos={filteredTodos} todoActions={todoActions} />
         <Footer
           todoFilter={todoFilter}
