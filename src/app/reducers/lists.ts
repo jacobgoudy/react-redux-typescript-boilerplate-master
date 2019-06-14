@@ -53,9 +53,33 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
       list.id === (action.payload as any) ? { ...list, completed: !list.completed } : list
       );
     },
-    // [ListActions.Type.SELECT_LIST]: (state, action) => {
-    //   return state.filter((list) => list.completed === false);
-    // }
+    [ListActions.Type.ADD_TODO]: (state, action) => {
+      let newState = state;
+      (newState[1].list.push({
+        text:'temp',
+        id:2,
+        completed:true
+      }));
+      //console.log(newState);
+      //console.log(newState);
+      // if (action.payload && action.payload.name) {
+      //   return [...state,
+
+      //     {name:'Use Redux',
+      //       id:1,
+      //       isSelected:true,
+      //       completed:false,
+      //       list:[{
+      //       id: state.reduce((max, list) => Math.max(list.id || 1, max), 0) + 1,
+      //       completed: false,
+      //       text: 'temp',
+      //     }]
+      //     },
+      //     ...state
+      //   ];
+      return newState;
+      // }
+    }
   },
   initialState
 );
