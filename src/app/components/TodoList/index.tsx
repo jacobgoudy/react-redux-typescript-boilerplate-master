@@ -1,19 +1,20 @@
 import * as React from 'react';
 import * as style from './style.css';
-import { TodoActions } from 'app/actions/todos';
+import { ListActions } from 'app/actions';
 import { TodoItem } from '../TodoItem';
 import { TodoModel } from 'app/models/TodoModel';
 
 export namespace TodoList {
   export interface Props {
     todos: TodoModel[];
-    todoActions: TodoActions;
+    todoActions: ListActions;
   }
 }
 
 export class TodoList extends React.Component<TodoList.Props> {
   renderToggleAll(): JSX.Element | void {
     const { todos, todoActions } = this.props;
+    console.log(todoActions);
     if (todos.length > 0) {
       const hasIncompleted = todos.some((todo) => !todo.completed);
       return (

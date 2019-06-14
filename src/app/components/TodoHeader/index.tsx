@@ -6,7 +6,6 @@ import { ListActions } from 'app/actions';
 export namespace TodoHeader {
   export interface Props {
     addTodo: typeof ListActions.addTodo;
-    currentList: ListModel;
   }
 }
 
@@ -16,15 +15,7 @@ export class TodoHeader extends React.Component<TodoHeader.Props> {
     this.handleSave = this.handleSave.bind(this);
   }
 
-  //handleSave(text: string) {
-    //if (text.length) {
-      //this.props.addTodo({name});
-      
-    //}
-  //}
-
   handleSave(text: string) {
-    //var text = ((event.target) as any).value;
     var name: string = text as string;
     if (name.length) {
       this.props.addTodo({name});

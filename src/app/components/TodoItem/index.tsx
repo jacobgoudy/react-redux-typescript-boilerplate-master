@@ -2,15 +2,16 @@ import * as React from 'react';
 import * as classNames from 'classnames';
 import * as style from './style.css';
 import { TodoModel } from 'app/models';
-import { TodoActions } from 'app/actions';
+import { ListActions } from 'app/actions/lists';
 import { TodoTextInput } from '../TodoTextInput';
+import { TodoActions } from 'app/actions';
 
 export namespace TodoItem {
   export interface Props {
     todo: TodoModel;
-    editTodo: typeof TodoActions.editTodo;
-    deleteTodo: typeof TodoActions.deleteTodo;
-    completeTodo: typeof TodoActions.completeTodo;
+    editTodo: typeof ListActions.editTodo;
+    deleteTodo: typeof ListActions.deleteTodo;
+    completeTodo: typeof ListActions.completeTodo;
   }
 
   export interface State {
@@ -32,7 +33,7 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
     if (text.length === 0) {
       this.props.deleteTodo(id);
     } else {
-      this.props.editTodo({ id, text });
+      this.props.editTodo({ id, name });
     }
     this.setState({ editing: false });
   }
