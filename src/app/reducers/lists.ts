@@ -57,8 +57,8 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
       let newState = state;
       var index = newState.findIndex(x => x.isSelected === true);
       (newState[index].list.push({
-        text: action.payload.name as any,
         id: newState[index].list.reduce((max, list) => Math.max(list.id || 1, max), 0) + 1,
+        text: action.payload.name as any,
         completed:false
       }));
       return newState;
@@ -66,13 +66,15 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
     [ListActions.Type.COMPLETE_TODO]: (state, action) => {
       let newState = state;
       var index = newState.findIndex(x => x.isSelected === true);
-      newState[index].list[(action.payload)-1].completed = !newState[index].list[action.payload-1].completed;
+      var selectedTodo = newState[index].list.findIndex(x => x.id === action.payload as any)
+      newState[index].list[selectedTodo].completed = !newState[index].list[selectedTodo].completed
       return newState;
     },
     [ListActions.Type.DELETE_TODO]: (state, action) => {
       let newState = state;
       var index = newState.findIndex(x => x.isSelected === true);
-      newState[index].list.splice((action.payload)-1,1);
+      var selectedTodo = newState[index].list.findIndex(x => x.id === action.payload as any);
+      newState[index].list.splice(selectedTodo,1);
       return newState;
     },
     [ListActions.Type.EDIT_LIST]: (state, action) => {
