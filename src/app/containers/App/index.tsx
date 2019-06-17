@@ -92,11 +92,6 @@ export class App extends React.Component<App.Props> {
       this.props.history.push(`#${this.props.listActions.editList({ id, name })}`);
   }
 
-  handleDeleteList(id: number) {
-    if ( id )
-      this.props.history.push(`#${this.props.listActions.deleteList(id)}`);
-  }
-
   render() {
     var { lists, todos, listActions, todoFilter } = this.props;
     var selectedList = lists.find(x => x.isSelected === true);
