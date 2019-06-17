@@ -81,9 +81,19 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
       return newState;
     },
     [ListActions.Type.EDIT_LIST]: (state, action) => {
+      console.log("editList ran");
       let newState = state;
-      //var index = newState.findIndex(x => x.isSelected === true);
+      var index = newState.findIndex(x => x.isSelected === true);
       console.log(action.payload);
+
+      var list = newState[index];
+      if (!list || !action || !action.payload) {
+        console.log("oof");
+        return newState;
+      } else {
+        newState[index].name = action.payload.name;
+        console.log("set name to: ",action.payload.name);
+      }
       return newState;
     },
     //*

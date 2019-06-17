@@ -85,6 +85,12 @@ export class App extends React.Component<App.Props> {
    });
   }
 
+  handleListEdit(id: number) {
+    var name = prompt('Enter a new list name','');
+    console.log(name);
+    if ( name ) this.props.listActions.editList({ id, name });
+  }
+
   render() {
     var { lists, todos, listActions, todoFilter } = this.props;
     var selectedList = lists.find(x => x.isSelected === true);
@@ -105,6 +111,12 @@ export class App extends React.Component<App.Props> {
             return <option value={list.id}>{list.name}</option>;
           })}
         </select>
+        <button
+          name="Edit"
+          className={style.edit}
+          onClick={() => {
+            if (selectedList.id) this.handleListEdit(selectedList.id);
+          }}>Edit List</button>
         <TodoHeader addTodo={listActions.addTodo}/>
         <TodoList todos={filteredTodos} todoActions={listActions} />
         <Footer
