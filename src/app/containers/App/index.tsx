@@ -88,8 +88,13 @@ export class App extends React.Component<App.Props> {
   handleListEdit(id: number) {
     var name = prompt('Enter a new list name','');
     console.log(name);
-    if ( name ) 
+    if ( name )
       this.props.history.push(`#${this.props.listActions.editList({ id, name })}`);
+  }
+
+  handleDeleteList(id: number) {
+    if ( id )
+      this.props.history.push(`#${this.props.listActions.deleteList(id)}`);
   }
 
   render() {
@@ -107,7 +112,13 @@ export class App extends React.Component<App.Props> {
     return (
       <div className={style.normal}>
         <ListHeader addList={listActions.addList} />
-        <select name="Lists" style={style.select} onChange={ e => this.handleChange(e) } value={ this.props.selectedValue }>
+        <select
+          name="Select a List"
+          style={style.select}
+          placeholder="Select a list"
+          onChange={ e => this.handleChange(e) }
+          value={ this.props.selectedValue }>
+          <option value="">Select a list</option>
           {lists.map((list) => {
             return <option value={list.id}>{list.name}</option>;
           })}
@@ -117,7 +128,18 @@ export class App extends React.Component<App.Props> {
           className={style.edit}
           onClick={() => {
             if (selectedList.id) this.handleListEdit(selectedList.id);
-          }}>Edit List</button>
+          }}>
+          Edit List
+        </button>
+        <button
+          name="Delete"
+          className={style.delete}
+          onClick={() => {
+            //this.props.listActions.deleteList(selectedList.id);
+            this.props.history.push(`#${this.props.listActions.deleteList(selectedList.id)}`);
+          }}>
+          Delete List
+        </button>
         <TodoHeader addTodo={listActions.addTodo}/>
         <TodoList todos={filteredTodos} todoActions={listActions} />
         <Footer

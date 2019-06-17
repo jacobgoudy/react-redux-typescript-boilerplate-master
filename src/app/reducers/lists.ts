@@ -7,14 +7,21 @@ const initialState: RootState.ListState = [
   {
     id:1,
     name: 'Use Redux',
-    list: [{id: 1, name:'temp', completed:false}, {id:2, name:'frick', completed:false}],
+    list: [{id: 1, name:'Learn Typescript', completed:false}, {id:2, name:'Add Lists', completed:false}],
     completed: false,
-    isSelected: true
+    isSelected: false
   }
   ,{
     id:2,
     name:'Use Java',
     list: [{id: 1, name:'Haskell', completed:false}, {id:2, name:'Python', completed:false}],
+    completed: false,
+    isSelected: false
+  },
+  {
+    id:3,
+    name:'Interns',
+    list: [{id:1, name:'Zach', completed:false}, {id:2, name:'Jacob', completed:false}],
     completed: false,
     isSelected: false
   }
