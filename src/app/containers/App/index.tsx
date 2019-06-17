@@ -55,9 +55,10 @@ export class App extends React.Component<App.Props> {
   }
 
   handleClearCompleted(): void {
-    const hasCompletedTodo = this.props.todos.some((todo) => todo.completed || false);
+    const index = this.props.lists.find(x => x.isSelected === true);
+    const hasCompletedTodo = (index as ListModel).list.find(x => x.completed === true);
     if (hasCompletedTodo) {
-      this.props.todoActions.clearCompleted();
+      this.props.listActions.clearCompleted();
     }
   }
 
