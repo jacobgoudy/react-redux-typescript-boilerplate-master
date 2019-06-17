@@ -45,7 +45,9 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
         return state;
       },
     [ListActions.Type.DELETE_LIST]: (state, action) => {
-      return state.filter((list) => list.id !== (action.payload as any));
+      let newState = state.filter((list) => list.id !== (action.payload as any));
+      newState[0].isSelected = true;
+      return newState;
     },
     [ListActions.Type.EDIT_LIST]: (state, action) => {
       return state.map((list) => {
