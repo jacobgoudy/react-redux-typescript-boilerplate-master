@@ -110,6 +110,12 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
       return newState;
     },
     //*/
+    [ListActions.Type.CLEAR_COMPLETED]: (state, action) => {
+      let newState = state;
+      var index = newState.findIndex(x => x.isSelected === true);
+      newState[index].list = newState[index].list.filter(x => x.completed === false);
+      return newState;
+    },
   },
   initialState
 );
