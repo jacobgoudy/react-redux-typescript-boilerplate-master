@@ -2,7 +2,7 @@
 
 export interface TodoModel {
   id: number;
-  text: string;
+  name: string;
   completed: boolean;
 }
 

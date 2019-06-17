@@ -7,14 +7,14 @@ const initialState: RootState.ListState = [
   {
     id:1,
     name: 'Use Redux',
-    list: [{id: 1, text:'temp', completed:false}, {id:2, text:'frick', completed:false}],
+    list: [{id: 1, name:'temp', completed:false}, {id:2, name:'frick', completed:false}],
     completed: false,
     isSelected: true
   }
   ,{
     id:2,
     name:'Use Java',
-    list: [{id: 1, text:'Haskell', completed:false}, {id:2, text:'Python', completed:false}],
+    list: [{id: 1, name:'Haskell', completed:false}, {id:2, name:'Python', completed:false}],
     completed: false,
     isSelected: false
   }
@@ -59,7 +59,7 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
         var index = newState.findIndex(x => x.isSelected === true);
         newState[index].list.push({
           id: newState[index].list.reduce((max, list) => Math.max(list.id || 1, max), 0) + 1,
-          text: action.payload.name as any,
+          name: action.payload.name as any,
           completed:false
         });
         return newState;
@@ -101,7 +101,8 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
       if (!selectedTodo || !action || !action.payload) {
         return newState;
       }
-      newState[index].list[selectedTodo] = ((newState[index].list[selectedTodo].id || 0) === action.payload.id ? { ...newState[index].list[selectedTodo], text: action.payload.name } : newState[index].list[selectedTodo]);
+      newState[index].list[selectedTodo] = ((newState[index].list[selectedTodo].id || 0) === action.payload.id ? { 
+        ...newState[index].list[selectedTodo], name: action.payload.name } : newState[index].list[selectedTodo]);
       return newState;
     },
     //*/
