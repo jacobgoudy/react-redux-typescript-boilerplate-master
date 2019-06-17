@@ -88,7 +88,8 @@ export class App extends React.Component<App.Props> {
   handleListEdit(id: number) {
     var name = prompt('Enter a new list name','');
     console.log(name);
-    if ( name ) this.props.listActions.editList({ id, name });
+    if ( name ) 
+      this.props.history.push(`#${this.props.listActions.editList({ id, name })}`);
   }
 
   render() {
