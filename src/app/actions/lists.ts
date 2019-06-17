@@ -24,7 +24,7 @@ export namespace ListActions {
   export const addTodo = createAction<PartialPick<ListModel, 'name'>>(Type.ADD_TODO);
   export const deleteTodo = createAction<ListModel['id']>(Type.DELETE_TODO);
   export const completeTodo = createAction<ListModel['id']>(Type.COMPLETE_TODO);
-  export const editTodo = createAction<PartialPick<ListModel, 'id'>>(Type.EDIT_LIST);
+  export const editTodo = createAction<PartialPick<ListModel, 'id'>>(Type.EDIT_TODO);
 }
 
 export type ListActions = Omit<typeof ListActions, 'Type'>;

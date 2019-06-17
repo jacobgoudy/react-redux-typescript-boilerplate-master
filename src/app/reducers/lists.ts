@@ -96,13 +96,17 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
     [ListActions.Type.EDIT_TODO]: (state, action) => {
       let newState = state;
       var index = newState.findIndex(x => x.isSelected === true);
-      console.log(action.payload);
-      var selectedTodo = newState[index].list.findIndex(x => x.id === action.payload as any);
-      if (!selectedTodo || !action || !action.payload) {
+      var selectedTodo = newState[index].list.findIndex(x => x.id === action.payload.id);
+
+      var todo = newState[index].list[selectedTodo];
+      if (!todo || !action || !action.payload) {
+        console.log("oof");
         return newState;
+      } else {
+        newState[index].list[selectedTodo].name = action.payload.name;
+        console.log("set name to: ",action.payload.name);
       }
-      newState[index].list[selectedTodo] = ((newState[index].list[selectedTodo].id || 0) === action.payload.id ? { 
-        ...newState[index].list[selectedTodo], name: action.payload.name } : newState[index].list[selectedTodo]);
+
       return newState;
     },
     //*/
