@@ -90,9 +90,8 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
     [ListActions.Type.COMPLETE_ALL]: (state, action) => {
       let newState = state;
       var index = newState.findIndex(x => x.isSelected === true);
-      return newState[index].list.map((todo) => ({ ...todo, completed: true }));
-
-      return newState;
+      newState[index].list.map((x => (x.completed = true)));
+      return newState
     },
     [ListActions.Type.EDIT_TODO]: (state, action) => {
       let newState = state;
