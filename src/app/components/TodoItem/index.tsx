@@ -45,14 +45,12 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
     this.props.assignTodo({name, id});
     this.setState({});
   }
-
+  //Add the notes, depending if there was a change, and if the notes are not empty
   handleNotes(id: number, notes: string){
-    var name = prompt(notes + " \nAdd more notes:",'');
-    if(name != null && name.trim().length != 0) {
-      name = notes.concat("\n", name);
+    var name = prompt(notes + " \nAdd more notes:",notes);
+    if(name != null && name.trim().length != 0 && name.trim() != notes.trim()) {
       this.props.addNotes({name, id});
     }
-    console.log(name);
   }
 
   render() {
