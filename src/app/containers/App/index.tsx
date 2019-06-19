@@ -123,7 +123,7 @@ export class App extends React.Component<App.Props> {
           name="Edit"
           className={style.edit}
           onClick={() => {
-            if (selectedList.id) this.handleListEdit(selectedList.id);
+            if (selectedList) this.handleListEdit(selectedList.id);
           }}>
           Edit List
         </button>
@@ -131,7 +131,7 @@ export class App extends React.Component<App.Props> {
           name="Delete"
           className={style.delete}
           onClick={() => {
-            this.props.history.push(`#${this.props.listActions.deleteList(selectedList.id)}`);
+            if (selectedList) this.props.history.push(`#${this.props.listActions.deleteList(selectedList.id)}`);
           }}>
           Delete List
         </button>

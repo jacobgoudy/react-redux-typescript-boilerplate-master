@@ -127,7 +127,6 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
       let newState = state;
       var index = newState.findIndex(x => x.isSelected === true);
       var selectedTodo = newState[index].list.findIndex(x => x.id === action.payload.id);
-
       var todo = newState[index].list[selectedTodo];
       if (!todo || !action || !action.payload) {
         console.log("oof");
@@ -148,7 +147,6 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
     },
     //Able to assign a todo
     [ListActions.Type.ASSIGN_TODO]: (state, action) => {
-      console.log('fuck');
       let newState = state;
       var index = newState.findIndex(x => x.isSelected === true);
       var selectedTodo = newState[index].list.findIndex(x => x.id === action.payload.id);
