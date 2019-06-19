@@ -151,7 +151,7 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
       let newState = state;
       var index = newState.findIndex(x => x.isSelected === true);
       var selectedTodo = newState[index].list.findIndex(x => x.id === action.payload.id);
-      newState[index].list[selectedTodo].assign = action.payload.name;
+      if(action.payload)newState[index].list[selectedTodo].assign = action.payload.name;
       console.log(newState[index].list[selectedTodo]);
       return newState;
     },
@@ -160,7 +160,7 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
       console.log(action.payload);
       var index = newState.findIndex(x => x.isSelected === true);
       var selectedTodo = newState[index].list.findIndex(x => x.id === action.payload.id);
-      newState[index].list[selectedTodo].notes = action.payload.name;
+      if(action.payload)newState[index].list[selectedTodo].notes = action.payload.name;
       console.log(newState[index].list[selectedTodo]);
       return newState;
     },

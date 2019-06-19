@@ -48,12 +48,11 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
 
   handleNotes(id: number, notes: string){
     var name = prompt(notes + " \nAdd more notes:",'');
-    if(name != null && name.trim.length != 0) 
+    if(name != null && name.trim().length != 0) {
       name = notes.concat("\n", name);
-    else
-      name = notes;
+      this.props.addNotes({name, id});
+    }
     console.log(name);
-    this.props.addNotes({name, id});
   }
 
   render() {
@@ -90,7 +89,7 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
           <button
             className={style.assigned}
             onClick={() => {
-              if(todo.id) this.handleNotes(todo.id, todo.notes);
+              if(todo.id) this.handleNotes(todo.id, todo.notes as any);
             }}
           />
           <button
