@@ -13,6 +13,7 @@ export namespace TodoItem {
     completeTodo: typeof ListActions.completeTodo;
     assignTodo: typeof ListActions.assignTodo;
     addNotes: typeof ListActions.addNotes;
+    addDate: typeof ListActions.addDate;
   }
 
   export interface State {
@@ -41,8 +42,14 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
 
   //assignes the task and resets the state
   handleAssign(id: number, name: string){
-    console.log('fuck debug');
+    console.log('frick debug');
     this.props.assignTodo({name, id});
+    this.setState({});
+  }
+
+  //Adds a due date to the todo and sets the state
+  handleDate(id: number, name: string) {
+    this.props.addDate({name, id});
     this.setState({});
   }
 
@@ -76,6 +83,16 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
             onChange={() => todo.id && completeTodo(todo.id)}
           />
           <label onDoubleClick={() => this.handleDoubleClick()}>{todo.name}</label>
+          <button
+            className={style.date}
+            onClick={() => {
+              var date = prompt('Enter a due date: ','Due date...');
+              if ( date ) {
+                console.log('date: ',date);
+                this.handleDate(todo.id, date as string);
+              }
+            }}
+          >{todo.date}</button>
           <button 
             className={style.assign}
             onClick={() => {

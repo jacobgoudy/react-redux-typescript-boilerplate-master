@@ -42,6 +42,7 @@ export class TodoList extends React.Component<TodoList.Props> {
               editTodo={todoActions.editTodo}
               assignTodo={todoActions.assignTodo}
               addNotes={todoActions.addNotes}
+              addDate={todoActions.addDate}
             />
           ))}
         </ul>

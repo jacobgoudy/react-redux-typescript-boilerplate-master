@@ -57,17 +57,41 @@
   display: block;
 }
 
-.normal .assign{
+.normal .date {
   position: absolute;
   top: 0;
-  right: 5px;
-  bottom: 0px;
+  right: 389px;
+  bottom: 2px;
   width: 100px;
   height: 11px;
   margin: auto 0;
   color: #747474;
-  font-size: 10px;
+  font-size: 12px;
   margin-bottom: 2px;
+  text-align: left;
+  transition: color 0.2s ease-out;
+}
+
+.normal .date:hover {
+  color: #000000;
+}
+
+.normal:hover .date {
+  display: block;
+}
+
+.normal .assign{
+  position: absolute;
+  top: 0;
+  right: 5px;
+  bottom: 2px;
+  width: 100px;
+  height: 10px;
+  margin: auto 0;
+  color: #747474;
+  font-size: 12px;
+  margin-bottom: 2px;
+  transition: color 0.2s ease-out;
 }
 
 .normal .assign:hover {

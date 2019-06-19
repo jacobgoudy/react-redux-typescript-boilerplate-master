@@ -6,6 +6,7 @@ export interface TodoModel {
   completed: boolean;
   assign?: string;
   notes?: string;
+  date: string;
 }
 
 export namespace TodoModel {

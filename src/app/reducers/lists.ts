@@ -7,21 +7,21 @@ const initialState: RootState.ListState = [
   {
     id:1,
     name: 'Use Redux',
-    list: [{id: 1, name:'Learn Typescript', completed:false, assign:"Not Assigned", notes:"Learn how to unit testing."}, {id:2, name:'Add Lists', completed:false, assign:"Not Assigned", notes:""}],
+    list: [{id: 1, name:'Learn Typescript', completed:false, assign:"Not Assigned", notes:"Learn how to unit testing.", date:"No due date"}, {id:2, name:'Add Lists', completed:false, assign:"Not Assigned", notes:"", date:"No due date"}],
     completed: false,
     isSelected: false
   }
   ,{
     id:2,
     name:'Use Java',
-    list: [{id: 1, name:'Haskell', completed:false, assign:"Jacob", notes:"Fake news"}, {id:2, name:'Python', completed:false, assign:"Not Assigned", notes:"Does this even matter."}],
+    list: [{id: 1, name:'Haskell', completed:false, assign:"Jacob", notes:"Fake news", date:"No due date"}, {id:2, name:'Python', completed:false, assign:"Not Assigned", notes:"Does this even matter.", date:"No due date"}],
     completed: false,
     isSelected: false
   },
   {
     id:3,
     name:'Interns',
-    list: [{id:1, name:'Zach', completed:false, assign:"Not Assigned", notes:""}, {id:2, name:'Jacob', completed:false, assign:"Zach", notes:"temp"}],
+    list: [{id:1, name:'Zach', completed:false, assign:"Not Assigned", notes:"", date:"No due date"}, {id:2, name:'Jacob', completed:false, assign:"Zach", notes:"temp", date:"No due date"}],
     completed: false,
     isSelected: false
   }
@@ -75,7 +75,8 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
           name: action.payload.name as any,
           completed:false,
           assign:"Not Assigned",
-          notes:""
+          notes:"",
+          date:"No due date"
         });
         return newState;
       }
@@ -164,6 +165,15 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
       console.log(newState[index].list[selectedTodo]);
       return newState;
     },
+    [ListActions.Type.ADD_DATE]: (state, action) => {
+      let newState = state;
+      console.log(action.payload);
+      var index = newState.findIndex(x => x.isSelected === true);
+      var selectedTodo = newState[index].list.findIndex(x => x.id === action.payload.id);
+      if(action.payload)newState[index].list[selectedTodo].date = action.payload.name;
+      console.log(newState[index].list[selectedTodo]);
+      return newState;
+    }
   },
   initialState
 );
