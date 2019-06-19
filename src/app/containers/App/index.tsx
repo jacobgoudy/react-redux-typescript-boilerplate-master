@@ -26,7 +26,6 @@ export namespace App {
     todoActions: TodoActions;
     listActions: ListActions;
     todoFilter: TodoModel.Filter;
-    selectedValue: number;
   }
 }
 
@@ -72,6 +71,7 @@ export class App extends React.Component<App.Props> {
 
   handleChange(event: React.FormEvent) {
     var selectedID = ((event.target) as any).value;
+    console.log("Selected ID: ",selectedID);
     this.setState({ selectedValue: selectedID });
     this.setState( { selectedValue: selectedID }, () => {
       this.props.lists.map((list) => {
@@ -95,6 +95,11 @@ export class App extends React.Component<App.Props> {
   render() {
     var { lists, todos, listActions, todoFilter } = this.props;
     var selectedList = lists.find(x => x.isSelected === true);
+    
+    if ( selectedList === undefined ) {
+      selectedList = lists[0];
+    }
+    
     if(selectedList != undefined)
       var selectedTodos = selectedList.list;
     else
@@ -111,8 +116,7 @@ export class App extends React.Component<App.Props> {
           name="Select a List"
           style={style.select}
           placeholder="Select a list"
-          onChange={ e => this.handleChange(e) }
-          value={ this.props.selectedValue }>
+          onChange={ e => this.handleChange(e) }>
           <option value="">Select a list</option>
           {lists.map((list) => {
             return <option value={list.id}>{list.name}</option>;
