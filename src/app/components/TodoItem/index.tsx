@@ -48,7 +48,10 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
 
   handleNotes(id: number, notes: string){
     var name = prompt(notes + " \nAdd more notes:",'');
-    if(name) name = notes.concat("\n", name);
+    if(name != null && name.trim.length != 0) 
+      name = notes.concat("\n", name);
+    else
+      name = notes;
     console.log(name);
     this.props.addNotes({name, id});
   }
