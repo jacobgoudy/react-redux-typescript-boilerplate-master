@@ -53,7 +53,7 @@ export class App extends React.Component<App.Props> {
     this.handleSelectedChange = this.handleSelectedChange.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
-
+  //able to clear all of the lists if there are some todos
   handleClearCompleted(): void {
     const index = this.props.lists.find(x => x.isSelected === true);
     const hasCompletedTodo = (index as ListModel).list.find(x => x.completed === true);
@@ -65,7 +65,7 @@ export class App extends React.Component<App.Props> {
   handleFilterChange(todoFilter: TodoModel.Filter): void {
     this.props.history.push(`#${todoFilter}`);
   }
-
+  //Changes todoList dependent on selected list
   handleSelectedChange(lists: ListModel):void{
     this.props.history.push(`#${lists.isSelected}`);
   }
@@ -94,6 +94,7 @@ export class App extends React.Component<App.Props> {
 
   render() {
     var { lists, todos, listActions, todoFilter } = this.props;
+    //gets the selected list and updates the view depending on it
     var selectedList = lists.find(x => x.isSelected === true);
     if(selectedList != undefined)
       var selectedTodos = selectedList.list;
@@ -103,7 +104,7 @@ export class App extends React.Component<App.Props> {
     const todoCount = todos.length - todos.filter((todo) => todo.completed).length;
     const filteredTodos = todoFilter ? todos.filter(TODO_FILTER_FUNCTIONS[todoFilter]) : todos;
     const completedCount = todos.reduce((count, todo) => (todo.completed ? count + 1 : count), 0);
-    //console.log(todos);
+    console.log(todos);
     return (
       <div className={style.normal}>
         <ListHeader addList={listActions.addList} />

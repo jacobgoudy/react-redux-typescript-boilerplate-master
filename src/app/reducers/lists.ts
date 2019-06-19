@@ -63,11 +63,14 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
       list.id === (action.payload as any) ? { ...list, completed: !list.completed } : list
       );
     },
+    //Adds a todo
     [ListActions.Type.ADD_TODO]: (state, action) => {
       if(action.payload && action.payload.name){
         let newState = state;
+        //Finds the index of the selected list
         var index = newState.findIndex(x => x.isSelected === true);
         newState[index].list.push({
+          //updates the list with the new todo by finding the largest id and adding one and assigning the text input to the name
           id: newState[index].list.reduce((max, list) => Math.max(list.id || 1, max), 0) + 1,
           name: action.payload.name as any,
           completed:false
@@ -76,16 +79,22 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
       }
       return state;
     },
+    //Complete a todo
     [ListActions.Type.COMPLETE_TODO]: (state, action) => {
       let newState = state;
+      //Finds the index of the selected list
       var index = newState.findIndex(x => x.isSelected === true);
+      //gets the selected list and assign's its completed value to the opposite
       var selectedTodo = newState[index].list.findIndex(x => x.id === action.payload as any)
       newState[index].list[selectedTodo].completed = !newState[index].list[selectedTodo].completed
       return newState;
     },
+    //delete Todo
     [ListActions.Type.DELETE_TODO]: (state, action) => {
       let newState = state;
+      //Finds the index of the selected list
       var index = newState.findIndex(x => x.isSelected === true);
+      //deletes the index from the list
       var selectedTodo = newState[index].list.findIndex(x => x.id === action.payload as any);
       newState[index].list.splice(selectedTodo,1);
       return newState;
@@ -106,7 +115,7 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
       }
       return newState;
     },
-    //*
+    //Completes all by going through each todo and assigning completed to true
     [ListActions.Type.COMPLETE_ALL]: (state, action) => {
       let newState = state;
       var index = newState.findIndex(x => x.isSelected === true);
@@ -129,7 +138,7 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
 
       return newState;
     },
-    //*/
+    //Filters out everything that is completed
     [ListActions.Type.CLEAR_COMPLETED]: (state, action) => {
       let newState = state;
       var index = newState.findIndex(x => x.isSelected === true);
