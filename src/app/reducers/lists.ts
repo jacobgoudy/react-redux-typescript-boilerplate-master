@@ -7,21 +7,21 @@ const initialState: RootState.ListState = [
   {
     id:1,
     name: 'Use Redux',
-    list: [{id: 1, name:'Learn Typescript', completed:false, assign:"Not Assigned"}, {id:2, name:'Add Lists', completed:false, assign:"Not Assigned"}],
+    list: [{id: 1, name:'Learn Typescript', completed:false, assign:"Not Assigned", notes:"Learn how to unit testing."}, {id:2, name:'Add Lists', completed:false, assign:"Not Assigned", notes:""}],
     completed: false,
     isSelected: false
   }
   ,{
     id:2,
     name:'Use Java',
-    list: [{id: 1, name:'Haskell', completed:false, assign:"Jacob"}, {id:2, name:'Python', completed:false, assign:"Not Assigned"}],
+    list: [{id: 1, name:'Haskell', completed:false, assign:"Jacob", notes:"Fake news"}, {id:2, name:'Python', completed:false, assign:"Not Assigned", notes:"Does this even matter."}],
     completed: false,
     isSelected: false
   },
   {
     id:3,
     name:'Interns',
-    list: [{id:1, name:'Zach', completed:false, assign:"Not Assigned"}, {id:2, name:'Jacob', completed:false, assign:"Zach"}],
+    list: [{id:1, name:'Zach', completed:false, assign:"Not Assigned", notes:""}, {id:2, name:'Jacob', completed:false, assign:"Zach", notes:"temp"}],
     completed: false,
     isSelected: false
   }
@@ -74,7 +74,8 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
           id: newState[index].list.reduce((max, list) => Math.max(list.id || 1, max), 0) + 1,
           name: action.payload.name as any,
           completed:false,
-          assign:"Not Assigned"
+          assign:"Not Assigned",
+          notes:""
         });
         return newState;
       }
@@ -150,7 +151,16 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
       let newState = state;
       var index = newState.findIndex(x => x.isSelected === true);
       var selectedTodo = newState[index].list.findIndex(x => x.id === action.payload.id);
-      newState[index].list[selectedTodo].assign = action.payload.name;
+      if(action.payload)newState[index].list[selectedTodo].assign = action.payload.name;
+      console.log(newState[index].list[selectedTodo]);
+      return newState;
+    },
+    [ListActions.Type.ADD_NOTES]: (state, action) => {
+      let newState = state;
+      console.log(action.payload);
+      var index = newState.findIndex(x => x.isSelected === true);
+      var selectedTodo = newState[index].list.findIndex(x => x.id === action.payload.id);
+      if(action.payload)newState[index].list[selectedTodo].notes = action.payload.name;
       console.log(newState[index].list[selectedTodo]);
       return newState;
     },
