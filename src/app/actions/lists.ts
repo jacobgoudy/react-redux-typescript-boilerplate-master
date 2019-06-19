@@ -13,7 +13,8 @@ export namespace ListActions {
     COMPLETE_TODO = 'COMPLETE_TODO',
     DELETE_TODO = 'DELETE_TODO',
     COMPLETE_ALL = 'COMPLETE_ALL',
-    CLEAR_COMPLETED = 'CLEAR_COMPLETED'
+    CLEAR_COMPLETED = 'CLEAR_COMPLETED',
+    ASSIGN_TODO = 'ASSIGN_TODO'
   }
 
   export const addList = createAction<PartialPick<ListModel, 'name'>>(Type.ADD_LIST);
@@ -27,6 +28,8 @@ export namespace ListActions {
   export const completeTodo = createAction<ListModel['id']>(Type.COMPLETE_TODO);
   export const editTodo = createAction<PartialPick<ListModel, 'id'>>(Type.EDIT_TODO);
   export const clearCompleted = createAction(Type.CLEAR_COMPLETED);
+  export const assignTodo = createAction(Type.ASSIGN_TODO);
+  
 }
 
 export type ListActions = Omit<typeof ListActions, 'Type'>;

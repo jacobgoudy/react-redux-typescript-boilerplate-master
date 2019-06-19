@@ -7,21 +7,21 @@ const initialState: RootState.ListState = [
   {
     id:1,
     name: 'Use Redux',
-    list: [{id: 1, name:'Learn Typescript', completed:false}, {id:2, name:'Add Lists', completed:false}],
+    list: [{id: 1, name:'Learn Typescript', completed:false, assign:"Not Assigned"}, {id:2, name:'Add Lists', completed:false, assign:"Not Assigned"}],
     completed: false,
     isSelected: false
   }
   ,{
     id:2,
     name:'Use Java',
-    list: [{id: 1, name:'Haskell', completed:false}, {id:2, name:'Python', completed:false}],
+    list: [{id: 1, name:'Haskell', completed:false, assign:"Jacob"}, {id:2, name:'Python', completed:false, assign:"Not Assigned"}],
     completed: false,
     isSelected: false
   },
   {
     id:3,
     name:'Interns',
-    list: [{id:1, name:'Zach', completed:false}, {id:2, name:'Jacob', completed:false}],
+    list: [{id:1, name:'Zach', completed:false, assign:"Not Assigned"}, {id:2, name:'Jacob', completed:false, assign:"Zach"}],
     completed: false,
     isSelected: false
   }
@@ -73,7 +73,8 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
           //updates the list with the new todo by finding the largest id and adding one and assigning the text input to the name
           id: newState[index].list.reduce((max, list) => Math.max(list.id || 1, max), 0) + 1,
           name: action.payload.name as any,
-          completed:false
+          completed:false,
+          assign:"Not Assigned"
         });
         return newState;
       }
@@ -143,6 +144,16 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
       let newState = state;
       var index = newState.findIndex(x => x.isSelected === true);
       newState[index].list = newState[index].list.filter(x => x.completed === false);
+      return newState;
+    },
+    //Able to assign a todo
+    [ListActions.Type.ASSIGN_TODO]: (state, action) => {
+      console.log('fuck');
+      let newState = state;
+      var index = newState.findIndex(x => x.isSelected === true);
+      var selectedTodo = newState[index].list.findIndex(x => x.id === action.payload.id);
+      newState[index].list[selectedTodo].assign = action.payload.name;
+      console.log(newState[index].list[selectedTodo]);
       return newState;
     },
   },

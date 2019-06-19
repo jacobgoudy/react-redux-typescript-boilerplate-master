@@ -104,7 +104,7 @@ export class App extends React.Component<App.Props> {
     const todoCount = todos.length - todos.filter((todo) => todo.completed).length;
     const filteredTodos = todoFilter ? todos.filter(TODO_FILTER_FUNCTIONS[todoFilter]) : todos;
     const completedCount = todos.reduce((count, todo) => (todo.completed ? count + 1 : count), 0);
-    console.log(todos);
+    console.log(lists);
     return (
       <div className={style.normal}>
         <ListHeader addList={listActions.addList} />
@@ -131,7 +131,6 @@ export class App extends React.Component<App.Props> {
           name="Delete"
           className={style.delete}
           onClick={() => {
-            //this.props.listActions.deleteList(selectedList.id);
             this.props.history.push(`#${this.props.listActions.deleteList(selectedList.id)}`);
           }}>
           Delete List
