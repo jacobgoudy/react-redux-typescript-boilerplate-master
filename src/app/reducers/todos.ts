@@ -13,7 +13,8 @@ export const todoReducer = handleActions<RootState.TodoState, TodoModel>(
           {
             id: state.reduce((max, todo) => Math.max(todo.id || 1, max), 0) + 1,
             completed: false,
-            name: action.payload.name
+            name: action.payload.name,
+            assign:"Not Assigned"
           },
           ...state
         ];

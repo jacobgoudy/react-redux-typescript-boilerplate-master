@@ -4,6 +4,7 @@ export interface TodoModel {
   id: number;
   name: string;
   completed: boolean;
+  assign: string;
 }
 
 export namespace TodoModel {

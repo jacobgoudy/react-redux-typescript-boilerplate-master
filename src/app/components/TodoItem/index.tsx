@@ -11,6 +11,7 @@ export namespace TodoItem {
     editTodo: typeof ListActions.editTodo;
     deleteTodo: typeof ListActions.deleteTodo;
     completeTodo: typeof ListActions.completeTodo;
+    assignTodo: typeof ListActions.assignTodo;
   }
 
   export interface State {
@@ -37,6 +38,13 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
     this.setState({ editing: false });
   }
 
+  //assignes the task and resets the state
+  handleAssign(id: number, name: string){
+    console.log('fuck debug');
+    this.props.assignTodo({name, id});
+    this.setState({});
+  }
+
   render() {
     const { todo, completeTodo, deleteTodo } = this.props;
     let element;
@@ -58,6 +66,22 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
             onChange={() => todo.id && completeTodo(todo.id)}
           />
           <label onDoubleClick={() => this.handleDoubleClick()}>{todo.name}</label>
+          <button 
+            className={style.assign}
+            onClick={() => {
+              var assign = prompt('Enter a person to assign it to','');
+              if(assign){
+                console.log('name:',assign, ' id:', todo.id);
+                this.handleAssign(todo.id, assign as string);
+              }
+            }}
+          >{todo.assign}</button>
+          <button
+            className={style.assigned}
+            onClick={() => {
+                console.log('add notes');
+            }}
+          />
           <button
             className={style.destroy}
             onClick={() => {

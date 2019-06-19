@@ -30,6 +30,54 @@
   transition: color 0.4s;
 }
 
+.normal .assigned {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 50px;
+  bottom: 0;
+  width: 40px;
+  height: 40px;
+  margin: auto 0;
+  font-size: 30px;
+  color: #929191;
+  margin-bottom: 11px;
+  transition: color 0.2s ease-out;
+}
+
+.normal .assigned:hover {
+  color: #3f3f3f;
+}
+
+.normal .assigned:after {
+  content: '+';
+}
+
+.normal:hover .assigned {
+  display: block;
+}
+
+.normal .assign{
+  position: absolute;
+  top: 0;
+  right: 5px;
+  bottom: 0px;
+  width: 100px;
+  height: 11px;
+  margin: auto 0;
+  color: #747474;
+  font-size: 10px;
+  margin-bottom: 2px;
+}
+
+.normal .assign:hover {
+  color: #000000;
+}
+
+.normal:hover .assign {
+  display: block;
+}
+
 .normal .destroy {
   display: none;
   position: absolute;
