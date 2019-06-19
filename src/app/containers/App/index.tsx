@@ -97,10 +97,6 @@ export class App extends React.Component<App.Props> {
     //gets the selected list and updates the view depending on it
     var selectedList = lists.find(x => x.isSelected === true);
     
-    if ( selectedList === undefined ) {
-      selectedList = lists[0];
-    }
-    
     if(selectedList != undefined)
       var selectedTodos = selectedList.list;
     else
