@@ -12,6 +12,7 @@ export namespace TodoItem {
     deleteTodo: typeof ListActions.deleteTodo;
     completeTodo: typeof ListActions.completeTodo;
     assignTodo: typeof ListActions.assignTodo;
+    addNotes: typeof ListActions.addNotes;
   }
 
   export interface State {
@@ -43,6 +44,13 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
     console.log('fuck debug');
     this.props.assignTodo({name, id});
     this.setState({});
+  }
+
+  handleNotes(id: number, notes: string){
+    var name = prompt(notes + " \nAdd more notes:",'');
+    if(name) name = notes.concat("\n", name);
+    console.log(name);
+    this.props.addNotes({name, id});
   }
 
   render() {
@@ -79,7 +87,7 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
           <button
             className={style.assigned}
             onClick={() => {
-                console.log('add notes');
+              if(todo.id) this.handleNotes(todo.id, todo.notes);
             }}
           />
           <button
