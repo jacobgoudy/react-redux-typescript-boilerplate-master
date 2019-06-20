@@ -128,16 +128,18 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
     [ListActions.Type.EDIT_TODO]: (state, action) => {
       let newState = state;
       var index = newState.findIndex(x => x.isSelected === true);
-      var selectedTodo = newState[index].list.findIndex(x => x.id === action.payload.id);
-      var todo = newState[index].list[selectedTodo];
-      if (!todo || !action || !action.payload) {
-        console.log("oof");
-        return newState;
-      } else {
-        newState[index].list[selectedTodo].name = action.payload.name;
-        console.log("set name to: ",action.payload.name);
+      if(action.payload){
+        const id = action.payload.id;
+        var selectedTodo = newState[index].list.findIndex(x => x.id === id);
+        var todo = newState[index].list[selectedTodo];
+        if (!todo || !action || !action.payload) {
+          console.log("oof");
+          return newState;
+        } else {
+          newState[index].list[selectedTodo].name = action.payload.name;
+          console.log("set name to: ",action.payload.name);
+        }
       }
-
       return newState;
     },
     //Filters out everything that is completed
@@ -151,27 +153,36 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
     [ListActions.Type.ASSIGN_TODO]: (state, action) => {
       let newState = state;
       var index = newState.findIndex(x => x.isSelected === true);
-      var selectedTodo = newState[index].list.findIndex(x => x.id === action.payload.id);
-      if(action.payload)newState[index].list[selectedTodo].assign = action.payload.name;
-      console.log(newState[index].list[selectedTodo]);
+      if(action.payload){
+        const id = action.payload.id;
+        var selectedTodo = newState[index].list.findIndex(x => x.id === id);
+        if(action.payload)newState[index].list[selectedTodo].assign = action.payload.name;
+        console.log(newState[index].list[selectedTodo]);
+      }
       return newState;
     },
     [ListActions.Type.ADD_NOTES]: (state, action) => {
       let newState = state;
       console.log(action.payload);
       var index = newState.findIndex(x => x.isSelected === true);
-      var selectedTodo = newState[index].list.findIndex(x => x.id === action.payload.id);
-      if(action.payload)newState[index].list[selectedTodo].notes = action.payload.name;
-      console.log(newState[index].list[selectedTodo]);
+      if(action.payload){
+        const id = action.payload.id;
+        var selectedTodo = newState[index].list.findIndex(x => x.id === id);
+        newState[index].list[selectedTodo].notes = action.payload.name;
+        console.log(newState[index].list[selectedTodo]);
+      }
       return newState;
     },
     [ListActions.Type.ADD_DATE]: (state, action) => {
       let newState = state;
       console.log(action.payload);
       var index = newState.findIndex(x => x.isSelected === true);
-      var selectedTodo = newState[index].list.findIndex(x => x.id === action.payload.id);
-      if(action.payload)newState[index].list[selectedTodo].date = action.payload.name;
-      console.log(newState[index].list[selectedTodo]);
+      if(action.payload){
+        const id = action.payload.id;
+        var selectedTodo = newState[index].list.findIndex(x => x.id === id);
+        newState[index].list[selectedTodo].date = action.payload.name;
+        console.log(newState[index].list[selectedTodo]);
+      }
       return newState;
     }
   },
