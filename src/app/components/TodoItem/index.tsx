@@ -48,8 +48,25 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
   }
   //Add the notes, depending if there was a change, and if the notes are not empty
 
+  dateValidation(name:string){
+    if(name.match(/[a-zA-Z]/)) return false;
+    var input = name.trim().toString().split('/');
+    var tempString = input[0].toString()+ "/" + input[1].toString() +"/" + input[2].toString();
+    if(!tempString.match(/(0?[1-9]|1[0-2])[^\w\d\r\n:](0?[1-9]|[12]\d|30|31)[^\w\d\r\n:](\d{4}|\d{2})/)) return false;
+    var numInput = input.map(x => +x);
+    if(numInput.length > 3) return false;
+    if((!(numInput[2] % 4 === 0 || (numInput[2] % 100 === 0 && numInput[2] % 400 === 0))) && numInput[0] === 2 && numInput[1]>28) return false;
+    if(numInput[0] < 1 || numInput[0] > 12)
+      return false;
+    var months = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    var accMonth = months[numInput[0]-1];
+    if(accMonth < numInput[1] || 0 > numInput[1])
+      return false;
+    return true;
+  }
   //Adds a due date to the todo and sets the state
   handleDate(id: number, name: string) {
+    if(!this.dateValidation(name)) return;
     this.props.addDate({name, id});
     this.setState({});
   }
@@ -85,7 +102,7 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
           <button
             className={style.date}
             onClick={() => {
-              var date = prompt('Enter a due date: ','Due date...');
+              var date = prompt('Enter a due date in the format mm/dd/yyyy: ','Due date...');
               if ( date ) {
                 console.log('date: ',date);
                 this.handleDate(todo.id, date as string);
