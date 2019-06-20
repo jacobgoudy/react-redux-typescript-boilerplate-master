@@ -26,6 +26,7 @@ export namespace App {
     todoActions: TodoActions;
     listActions: ListActions;
     todoFilter: TodoModel.Filter;
+    selectedValue: number;
   }
 }
 
@@ -65,8 +66,9 @@ export class App extends React.Component<App.Props> {
     this.props.history.push(`#${todoFilter}`);
   }
   //Changes todoList dependent on selected list
-  handleSelectedChange(lists: ListModel):void{
-    this.props.history.push(`#${lists.isSelected}`);
+  handleSelectedChange(list: ListModel):void{
+    this.props.history.push(`#${list.isSelected}`);
+    console.log(this.props.history);
   }
 
   handleChange(event: React.FormEvent) {
@@ -76,10 +78,14 @@ export class App extends React.Component<App.Props> {
     this.setState( { selectedValue: selectedID }, () => {
       this.props.lists.map((list) => {
         var listID = list.id as number;
-        if ( +selectedID === listID )
+        if ( +selectedID === listID ) {
           list.isSelected = true;
-        else
+          console.log("true triggered");
+        }
+        else {
           list.isSelected = false;
+          console.log("false triggered");
+        }
         this.handleSelectedChange(list);
       })
    });
@@ -90,6 +96,10 @@ export class App extends React.Component<App.Props> {
     console.log(name);
     if ( name )
       this.props.history.push(`#${this.props.listActions.editList({ id, name })}`);
+  }
+
+  handleListAdd() {
+
   }
 
   render() {
@@ -108,12 +118,14 @@ export class App extends React.Component<App.Props> {
     console.log(lists);
     return (
       <div className={style.normal}>
-        <ListHeader addList={listActions.addList} />
+        <ListHeader addList={listActions.addList} selectedValue={this.props.selectedValue}/>
         <select
           name="Select a List"
           style={style.select}
           placeholder="Select a list"
-          onChange={ e => this.handleChange(e) }>
+          onChange={ e => this.handleChange(e) }
+          //if new list is added, next list above current list is showing due to new list being added to the head and nto the tail
+          value={this.props.selectedValue}>
           <option value="">Select a list</option>
           {lists.map((list) => {
             return <option value={list.id}>{list.name}</option>;

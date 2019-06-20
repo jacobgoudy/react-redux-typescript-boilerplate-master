@@ -30,20 +30,25 @@ const initialState: RootState.ListState = [
 export const listReducer = handleActions<RootState.ListState, ListModel>(
   {
     [ListActions.Type.ADD_LIST]: (state, action) => {
-        if (action.payload && action.payload.name) {
-          return [
-            {
-              id: state.reduce((max, list) => Math.max(list.id || 1, max), 0) + 1,
-              completed: false,
-              list: [],
-              name: action.payload.name,
-              isSelected: true
-            },
-            ...state
-          ];
-        }
-        return state;
-      },
+      state.map((list) => {
+        list.isSelected = false;
+      });
+      //*
+      if (action.payload && action.payload.name) {
+        return [
+          {
+            id: state.reduce((max, list) => Math.max(list.id || 1, max), 0) + 1,
+            completed: false,
+            list: [],
+            name: action.payload.name,
+            isSelected: true
+          },
+          ...state
+        ];
+      }
+      return state;
+      //*/
+    },
     [ListActions.Type.DELETE_LIST]: (state, action) => {
       let newState = state.filter((list) => list.id !== (action.payload as any));
       if ( newState[0] )
