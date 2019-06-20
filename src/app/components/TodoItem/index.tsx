@@ -46,20 +46,25 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
     this.props.assignTodo({name, id});
     this.setState({});
   }
-  //Add the notes, depending if there was a change, and if the notes are not empty
-
+  
+  //Checks to see the inputed date is valid
   dateValidation(name:string){
+    //Looks for anything regarding letters and results in false
     if(name.match(/[a-zA-Z]/)) return false;
     var input = name.trim().toString().split('/');
     var tempString = input[0].toString()+ "/" + input[1].toString() +"/" + input[2].toString();
+    //if its not in the correct mm/dd/yyyy format => false
     if(!tempString.match(/(0?[1-9]|1[0-2])[^\w\d\r\n:](0?[1-9]|[12]\d|30|31)[^\w\d\r\n:](\d{4}|\d{2})/)) return false;
     var numInput = input.map(x => +x);
+    //if there is mm/dd/yyyy/ddd => false
     if(numInput.length > 3) return false;
+    //If its is not a lear year, and the day is larger that 28 => false
     if((!(numInput[2] % 4 === 0 || (numInput[2] % 100 === 0 && numInput[2] % 400 === 0))) && numInput[0] === 2 && numInput[1]>28) return false;
     if(numInput[0] < 1 || numInput[0] > 12)
       return false;
     var months = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     var accMonth = months[numInput[0]-1];
+    //if the day is greater than the month day or less that 0 => false
     if(accMonth < numInput[1] || 0 > numInput[1])
       return false;
     return true;
