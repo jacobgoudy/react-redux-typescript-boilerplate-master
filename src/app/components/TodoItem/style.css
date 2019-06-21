@@ -27,6 +27,7 @@
   margin-left: 45px;
   display: block;
   line-height: 1.2;
+  font-size: 24px;
   transition: color 0.4s;
 }
 
@@ -61,7 +62,7 @@
   position: absolute;
   top: 0;
   right: 389px;
-  bottom: 2px;
+  bottom: 5px;
   width: 100px;
   height: 11px;
   margin: auto 0;
@@ -84,7 +85,7 @@
   position: absolute;
   top: 0;
   right: 5px;
-  bottom: 2px;
+  bottom: 5px;
   width: 100px;
   height: 10px;
   margin: auto 0;
