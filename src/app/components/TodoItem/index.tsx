@@ -98,10 +98,10 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
     console.log("Created date: ",currentDate);
     console.log("Todo date: ",todo.date)
     if ((todo.date).match(regexToday) !== null) {
-      var date = "today";
+      var date = "Today";
       console.log("today match");
     } else if ((todo.date).match(regexTomorrow) !== null) {
-      var date = "tomorrow";
+      var date = "Tomorrow";
       console.log("tomorrow match");
     } else {
       var date = todo.date;
