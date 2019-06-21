@@ -68,6 +68,12 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
     //if the day is greater than the month day or less that 0 => false
     if(accMonth < numInput[1] || 0 > numInput[1])
       return false;
+    var today = new Date();
+    var day = today.getDate();
+    var month = today.getMonth() + 1;
+    var year = today.getFullYear();
+    if(year > numInput[2] || (year == numInput[2] && (month > numInput[0] || (month == numInput[0] && day > numInput[1]))))
+      return false;
     return true;
   }
   //Adds a due date to the todo and sets the state
