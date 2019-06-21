@@ -98,17 +98,15 @@ export class App extends React.Component<App.Props> {
       this.props.history.push(`#${this.props.listActions.editList({ id, name })}`);
   }
 
-  handleListAdd() {
-
-  }
-
   render() {
-    var { lists, todos, listActions, todoFilter } = this.props;
+    var { lists, todos, listActions, todoFilter, selectedValue } = this.props;
     //gets the selected list and updates the view depending on it
     var selectedList = lists.find(x => x.isSelected === true);
     
-    if(selectedList != undefined)
+    if(selectedList != undefined) {
       var selectedTodos = selectedList.list;
+      selectedValue = selectedList.id;
+    }
     else
       var selectedTodos:TodoModel[] = [];
     todos = selectedTodos;
@@ -118,14 +116,14 @@ export class App extends React.Component<App.Props> {
     console.log(lists);
     return (
       <div className={style.normal}>
-        <ListHeader addList={listActions.addList} selectedValue={this.props.selectedValue}/>
+        <ListHeader addList={listActions.addList}/>
         <select
           name="Select a List"
           style={style.select}
           placeholder="Select a list"
           onChange={ e => this.handleChange(e) }
           //if new list is added, next list above current list is showing due to new list being added to the head and nto the tail
-          value={this.props.selectedValue}>
+          value={selectedValue}>
           <option value="">Select a list</option>
           {lists.map((list) => {
             return <option value={list.id}>{list.name}</option>;
