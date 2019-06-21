@@ -7,14 +7,14 @@ const initialState: RootState.ListState = [
   {
     id:1,
     name: 'Use Redux',
-    list: [{id: 1, name:'Learn Typescript', completed:false, assign:"Not Assigned", notes:"Learn how to unit testing.", date:"No due date"}, {id:2, name:'Add Lists', completed:false, assign:"Not Assigned", notes:"", date:"No due date"}],
+    list: [{id: 1, name:'Learn Typescript', completed:false, assign:"Not Assigned", notes:"Learn how to unit testing.", date:"06/21/2019"}, {id:2, name:'Add Lists', completed:false, assign:"Not Assigned", notes:"", date:"06/22/2019"}],
     completed: false,
     isSelected: false
   }
   ,{
     id:2,
     name:'Use Java',
-    list: [{id: 1, name:'Haskell', completed:false, assign:"Jacob", notes:"Fake news", date:"No due date"}, {id:2, name:'Python', completed:false, assign:"Not Assigned", notes:"Does this even matter.", date:"No due date"}],
+    list: [{id: 1, name:'Haskell', completed:false, assign:"Jacob", notes:"Fake news", date:"06/23/2019"}, {id:2, name:'Python', completed:false, assign:"Not Assigned", notes:"Does this even matter.", date:"No due date"}],
     completed: false,
     isSelected: false
   },

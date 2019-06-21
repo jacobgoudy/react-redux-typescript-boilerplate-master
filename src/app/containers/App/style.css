@@ -111,3 +111,13 @@ input[type='checkbox'] {
   -ms-text-rendering: optimizeLegibility;
   text-rendering: optimizeLegibility;
 }
+
+.normal h2 {
+  position: absolute;
+  top: -50px;
+  width: 100%;
+  font-size: 25px;
+  font-weight: 100;
+  text-align: center;
+  color: rgba(102, 28, 28, 0.15);
+}

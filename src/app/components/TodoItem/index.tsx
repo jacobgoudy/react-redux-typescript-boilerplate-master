@@ -29,6 +29,7 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
 
   handleDoubleClick() {
     this.setState({ editing: true });
+    //console.log("Today's date: ", new Date().getDate());
   }
 
   handleSave(id: number, name: string) {
@@ -85,6 +86,28 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
 
   render() {
     const { todo, completeTodo, deleteTodo } = this.props;
+    // Display date as today or tomorrow if it matches those dates
+    var today = new Date();
+    var day = today.getDate();
+    var month = today.getMonth() + 1;
+    var year = today.getFullYear();
+    var currentDate: string = month+'/'+day+'/'+year;
+    var tomorrowsDate: string = month+'/'+(day + 1)+'/'+year;
+    var regexToday = new RegExp(currentDate);
+    var regexTomorrow = new RegExp(tomorrowsDate);
+    console.log("Created date: ",currentDate);
+    console.log("Todo date: ",todo.date)
+    if ((todo.date).match(regexToday) !== null) {
+      var date = "today";
+      console.log("today match");
+    } else if ((todo.date).match(regexTomorrow) !== null) {
+      var date = "tomorrow";
+      console.log("tomorrow match");
+    } else {
+      var date = todo.date;
+    }
+    console.log("Final date: ",date);
+    
     let element;
     if (this.state.editing) {
       element = (
@@ -113,7 +136,7 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
                 this.handleDate(todo.id, date as string);
               }
             }}
-          >{todo.date}</button>
+          >{date}</button>
           <button 
             className={style.assign}
             onClick={() => {

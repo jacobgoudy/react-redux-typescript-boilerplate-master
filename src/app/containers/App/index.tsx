@@ -114,8 +114,19 @@ export class App extends React.Component<App.Props> {
     const filteredTodos = todoFilter ? todos.filter(TODO_FILTER_FUNCTIONS[todoFilter]) : todos;
     const completedCount = todos.reduce((count, todo) => (todo.completed ? count + 1 : count), 0);
     console.log(lists);
+
+    var today = new Date();
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    var day = today.getDate();
+    var month = months[today.getMonth()];
+    var year = today.getFullYear();
+
+    var todaysDate = "Today is: "+month+" "+day+", "+year;
     return (
       <div className={style.normal}>
+        <header>
+          <h2>{todaysDate}</h2>
+        </header>
         <ListHeader addList={listActions.addList}/>
         <select
           name="Select a List"
