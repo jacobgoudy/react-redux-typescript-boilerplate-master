@@ -140,6 +140,7 @@ export class App extends React.Component<App.Props> {
             return <option value={list.id}>{list.name}</option>;
           })}
         </select>
+        <div className={style.divider}/>
         <button
           name="Edit"
           className={style.edit}
@@ -148,6 +149,7 @@ export class App extends React.Component<App.Props> {
           }}>
           Edit List
         </button>
+        <div className={style.divider}/>
         <button
           name="Delete"
           className={style.delete}
