@@ -28,6 +28,7 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
   }
 
   handleDoubleClick() {
+    console.log("----------TodoItem: handleDoubleClick-----------")
     this.setState({ editing: true });
     //console.log("Today's date: ", new Date().getDate());
   }

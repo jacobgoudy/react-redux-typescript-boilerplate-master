@@ -55,6 +55,7 @@ export class App extends React.Component<App.Props> {
   }
   //able to clear all of the lists if there are some todos
   handleClearCompleted(): void {
+    console.log("----------handClearCompleted----------");
     const index = this.props.lists.find(x => x.isSelected === true);
     const hasCompletedTodo = (index as ListModel).list.find(x => x.completed === true);
     if (hasCompletedTodo) {
@@ -63,15 +64,18 @@ export class App extends React.Component<App.Props> {
   }
 
   handleFilterChange(todoFilter: TodoModel.Filter): void {
+    console.log("----------handleFilterChange----------");
     this.props.history.push(`#${todoFilter}`);
   }
   //Changes todoList dependent on selected list
   handleSelectedChange(list: ListModel):void{
+    console.log("----------handleSelectedChange----------");
     this.props.history.push(`#${list.isSelected}`);
     console.log(this.props.history);
   }
 
   handleChange(event: React.FormEvent) {
+    console.log("----------handleChange----------");
     var selectedID = ((event.target) as any).value;
     console.log("Selected ID: ",selectedID);
     this.setState({ selectedValue: selectedID });
@@ -92,6 +96,7 @@ export class App extends React.Component<App.Props> {
   }
 
   handleListEdit(id: number) {
+    console.log("----------handleListEdit----------");
     var name = prompt('Enter a new list name','');
     console.log(name);
     if ( name )
