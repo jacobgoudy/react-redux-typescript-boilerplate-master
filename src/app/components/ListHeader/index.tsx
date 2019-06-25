@@ -15,6 +15,7 @@ export class ListHeader extends React.Component<ListHeader.Props> {
   }
 
   handleSave(name: string) {
+    console.log("----------ListHeader: handleSave----------");
     if (name.length) {
       this.props.addList({ name });
     }

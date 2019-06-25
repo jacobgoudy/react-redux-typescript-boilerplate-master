@@ -7,6 +7,10 @@ export interface TodoModel {
   assign?: string;
   notes?: string;
   date: string;
+  dayOfYear?: number;
+  day?: number;
+  month?: number;
+  year?: number;
 }
 
 export namespace TodoModel {

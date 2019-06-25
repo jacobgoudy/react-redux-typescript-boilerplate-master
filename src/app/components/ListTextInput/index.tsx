@@ -26,6 +26,7 @@ export class ListTextInput extends React.Component<ListTextInput.Props, ListText
   }
 
   handleSubmit(event: React.KeyboardEvent<HTMLInputElement>) {
+    console.log("----------ListTextInput: handleSubmit----------");
     const text = event.currentTarget.value.trim();
     if (event.which === 13) {
       this.props.onSave(text);
@@ -36,10 +37,12 @@ export class ListTextInput extends React.Component<ListTextInput.Props, ListText
   }
 
   handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    console.log("----------ListTextInput: handleChange----------");
     this.setState({ name: event.target.value });
   }
 
   handleBlur(event: React.FocusEvent<HTMLInputElement>) {
+    console.log("----------ListTextInput: handleBlur----------");
     const text = event.target.value.trim();
     if (!this.props.newList) {
       this.props.onSave(text);

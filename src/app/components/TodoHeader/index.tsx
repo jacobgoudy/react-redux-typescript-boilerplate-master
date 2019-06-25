@@ -15,6 +15,7 @@ export class TodoHeader extends React.Component<TodoHeader.Props> {
   }
 
   handleSave(text: string) {
+    console.log("----------TodoHeader: handleSave----------");
     var name: string = text as string;
     if (name.length) {
       this.props.addTodo({name});
