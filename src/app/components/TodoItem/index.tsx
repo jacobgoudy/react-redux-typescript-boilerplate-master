@@ -90,16 +90,10 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
     this.setState({});
   }
 
-  handleChange(date: Date) {
-  
+  handleChange(date: Date, id: number) {
     //console.log((date.getMonth() + 1).toString() + "/" + date.getDate().toString() +"/"+ date.getFullYear().toString());
-    var newDate = (date.getMonth() + 1).toString() + "/" + date.getDate().toString() +"/"+ date.getFullYear().toString();
-    console.log(newDate);
-    //this.handleDate(id, newDate);
-    // this.setState({
-    //   startDate: date
-    // });
-    //this.handleDate(date.toString());
+    var name = (date.getMonth() + 1).toString() + "/" + date.getDate().toString() +"/"+ date.getFullYear().toString();
+    this.handleDate(id, name);
   }
 
   handleNotes(id: number, notes: string){
@@ -109,9 +103,7 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
     }
   }
 
-  render() {
-    const { todo, completeTodo, deleteTodo } = this.props;
-    // Display date as today or tomorrow if it matches those dates
+  handleChangeToToday(todo:TodoModel){
     var today = new Date();
     var day = today.getDate();
     var month = today.getMonth() + 1;
@@ -132,7 +124,12 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
       var date = todo.date;
     }
     console.log("Final date: ",date);
-    
+  }
+
+  render() {
+    const { todo, completeTodo, deleteTodo } = this.props;
+    // Display date as today or tomorrow if it matches those dates
+    this.handleChangeToToday(todo);
     let element;
     if (this.state.editing) {
       element = (
@@ -152,21 +149,11 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
             onChange={() => todo.id && completeTodo(todo.id)}
           />
           <label onDoubleClick={() => this.handleDoubleClick()}>{todo.name}</label>
-          {/* <button
-            className={style.date}
-            onClick={() => {
-              var date = prompt('Enter a due date in the format mm/dd/yyyy: ','Due date...');
-              if ( date ) {
-                console.log('date: ',date);
-                this.handleDate(todo.id, date as string);
-              }
-            }}
-          >{date}</button> */}
           <DatePicker 
-            selected={new Date(todo.date)} 
-            onChange={this.handleChange}
+            selected={new Date(todo.date)}
+            onChange={(date) => todo.id && this.handleChange(date as Date, todo.id)}
             todayButton={"Today"}
-            placeholderText="Click to select a date"
+            placeholderText={"Click to select a date"}
             minDate={new Date()}
           />
           <button 
