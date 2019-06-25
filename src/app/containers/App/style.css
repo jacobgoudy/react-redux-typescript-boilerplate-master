@@ -105,7 +105,7 @@ input[type='checkbox'] {
   font-size: 100px;
   font-weight: 100;
   text-align: center;
-  color: rgba(175, 47, 47, 0.15);
+  color: rgba(175, 47, 47, 0.829);
   -webkit-text-rendering: optimizeLegibility;
   -moz-text-rendering: optimizeLegibility;
   -ms-text-rendering: optimizeLegibility;
@@ -117,9 +117,9 @@ input[type='checkbox'] {
   top: -50px;
   width: 100%;
   font-size: 25px;
-  font-weight: 100;
+  font-weight: 150;
   text-align: center;
-  color: rgba(8, 8, 8, 0.15);
+  color: rgba(8, 8, 8, 0.897);
 }
 
 .divider{
