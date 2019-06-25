@@ -7,21 +7,21 @@ const initialState: RootState.ListState = [
   {
     id:1,
     name: 'Use Redux',
-    list: [{id: 1, name:'Learn Typescript', completed:false, assign:"Not Assigned", notes:"Learn how to unit testing.", date:"06/21/2019"}, {id:2, name:'Add Lists', completed:false, assign:"Not Assigned", notes:"", date:"06/22/2019"}],
+    list: [{id: 1, name:'Learn Typescript', completed:false, assign:"Not Assigned", notes:"Learn how to unit testing.", date:"07/21/2019"}, {id:2, name:'Add Lists', completed:false, assign:"Not Assigned", notes:"", date:"09/22/2019"}],
     completed: false,
     isSelected: false
   }
   ,{
     id:2,
     name:'Use Java',
-    list: [{id: 1, name:'Haskell', completed:false, assign:"Jacob", notes:"Fake news", date:"06/23/2019"}, {id:2, name:'Python', completed:false, assign:"Not Assigned", notes:"Does this even matter.", date:"No due date"}],
+    list: [{id: 1, name:'Haskell', completed:false, assign:"Jacob", notes:"Fake news", date:"11/23/2021"}, {id:2, name:'Python', completed:false, assign:"Not Assigned", notes:"Does this even matter.", date:"09/23/2020"}],
     completed: false,
     isSelected: false
   },
   {
     id:3,
     name:'Interns',
-    list: [{id:1, name:'Zach', completed:false, assign:"Not Assigned", notes:"", date:"No due date"}, {id:2, name:'Jacob', completed:false, assign:"Zach", notes:"temp", date:"No due date"}],
+    list: [{id:1, name:'Zach', completed:false, assign:"Not Assigned", notes:"", date:"11/12/2019"}, {id:2, name:'Jacob', completed:false, assign:"Zach", notes:"temp", date:"12/30/2019"}],
     completed: false,
     isSelected: false
   }
