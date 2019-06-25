@@ -167,7 +167,6 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
             onChangeRaw={(event) => todo.id && this.handleChangeRaw(event.target.value, todo.id)}
             onChange={(date) => todo.id && this.handleChange(date as Date, todo.id)}
             todayButton={"Today"}
-            
             placeholderText={"Click to select a date"}
             minDate={new Date()}
           />

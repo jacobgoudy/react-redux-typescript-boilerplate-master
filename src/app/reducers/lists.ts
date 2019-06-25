@@ -81,7 +81,7 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
           completed:false,
           assign:"Not Assigned",
           notes:"",
-          date:"No due date"
+          date:"6/25/2019"
         });
         return newState;
       }
