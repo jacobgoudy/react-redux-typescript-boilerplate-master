@@ -187,6 +187,246 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
         var selectedTodo = newState[index].list.findIndex(x => x.id === id);
         newState[index].list[selectedTodo].date = action.payload.name;
         console.log(newState[index].list[selectedTodo]);
+
+        var dateArr = action.payload.name.split('/',3);
+        console.log(dateArr);
+
+        // Assigning year as a number
+        var thisYear:number = (dateArr[2] as unknown) as number;
+        newState[index].list[selectedTodo].year = (dateArr[2] as unknown) as number;
+        var isLeapYear: boolean;
+        if (((thisYear % 4 == 0) && !(thisYear % 100 == 0)) || (thisYear % 400 == 0)) {
+          isLeapYear = true;
+        } else {
+          isLeapYear = false;
+        }
+
+        // Assigning number value to month
+        switch (dateArr[0]) {
+          case "1":
+          case "01":
+            newState[index].list[selectedTodo].month = 1;
+            break;
+          case "2":
+          case "02":
+            newState[index].list[selectedTodo].month = 2;
+            break;
+          case "3":
+          case "03":
+            newState[index].list[selectedTodo].month = 3;
+            break;
+          case "4":
+          case "04":
+            newState[index].list[selectedTodo].month = 4;
+            break;
+          case "5":
+          case "05":
+            newState[index].list[selectedTodo].month = 5;
+          case "6":
+          case "06":
+            newState[index].list[selectedTodo].month = 6;
+            break;
+          case "7":
+          case "07":
+            newState[index].list[selectedTodo].month = 7;
+            break;
+          case "8":
+          case "08":
+            newState[index].list[selectedTodo].month = 8;
+            break;
+          case "9":
+          case "09":
+            newState[index].list[selectedTodo].month = 9;
+            break;
+          case "10":
+            newState[index].list[selectedTodo].month = 10;
+            break;
+          case "11":
+            newState[index].list[selectedTodo].month = 11;
+            break;
+          case "12":
+            newState[index].list[selectedTodo].month = 12;
+            break;
+          default:
+            newState[index].list[selectedTodo].month = 0;
+        }
+        // Assigning number value to day
+        switch(dateArr[1]){
+          case "1":
+          case "01":
+            newState[index].list[selectedTodo].day = 1;
+            break;
+          case "2":
+          case "02":
+            newState[index].list[selectedTodo].day = 2;
+            break;
+          case "3":
+          case "03":
+            newState[index].list[selectedTodo].day = 3;
+            break;
+          case "4":
+          case "04":
+            newState[index].list[selectedTodo].day = 4;
+            break;
+          case "5":
+          case "05":
+            newState[index].list[selectedTodo].day = 5;
+          case "6":
+          case "06":
+            newState[index].list[selectedTodo].day = 6;
+            break;
+          case "7":
+          case "07":
+            newState[index].list[selectedTodo].day = 7;
+            break;
+          case "8":
+          case "08":
+            newState[index].list[selectedTodo].day = 8;
+            break;
+          case "9":
+          case "09":
+            newState[index].list[selectedTodo].day = 9;
+            break;
+          case "10":
+            newState[index].list[selectedTodo].day = 10;
+            break;
+          case "11":
+            newState[index].list[selectedTodo].day = 11;
+            break;
+          case "12":
+            newState[index].list[selectedTodo].day = 12;
+            break;
+          case "13":
+            newState[index].list[selectedTodo].day = 13;
+            break;
+          case "14":
+            newState[index].list[selectedTodo].day = 14;
+            break;
+          case "15":
+            newState[index].list[selectedTodo].day = 15;
+            break;
+          case "16":
+            newState[index].list[selectedTodo].day = 16;
+            break;
+          case "17":
+            newState[index].list[selectedTodo].day = 17;
+            break;
+          case "18":
+            newState[index].list[selectedTodo].day = 18;
+            break;
+          case "19":
+            newState[index].list[selectedTodo].day = 19;
+            break;
+          case "20":
+            newState[index].list[selectedTodo].day = 20;
+            break;
+          case "21":
+            newState[index].list[selectedTodo].day = 21;
+            break;
+          case "22":
+            newState[index].list[selectedTodo].day = 22;
+            break;
+          case "23":
+            newState[index].list[selectedTodo].day = 23;
+            break;
+          case "24":
+            newState[index].list[selectedTodo].day = 24;
+            break;
+          case "25":
+            newState[index].list[selectedTodo].day = 25;
+            break;
+          case "26":
+            newState[index].list[selectedTodo].day = 26;
+            break;
+          case "27":
+            newState[index].list[selectedTodo].day = 27;
+            break;
+          case "28":
+            newState[index].list[selectedTodo].day = 28;
+            break;
+          case "29":
+            if(newState[index].list[selectedTodo].month == 2 && !isLeapYear) {
+              newState[index].list[selectedTodo].day = 28;
+              console.log("Feb only has 28 days ya dingus!");
+            } else {
+              newState[index].list[selectedTodo].day = 29;
+              console.log("It's a leap year!");
+            }
+            break;
+          case "30":
+            if(newState[index].list[selectedTodo].month == 2) {
+              if(!isLeapYear) {
+                newState[index].list[selectedTodo].day = 28
+              } else {
+                newState[index].list[selectedTodo].day = 29;
+              }
+            } else {
+              newState[index].list[selectedTodo].day = 30;
+            }
+            break;
+          case "31":
+            if((newState[index].list[selectedTodo].month == 4) ||
+               (newState[index].list[selectedTodo].month == 6) ||
+               (newState[index].list[selectedTodo].month == 9) ||
+               (newState[index].list[selectedTodo].month == 11)) {
+              newState[index].list[selectedTodo].day = 30;
+            } else if (newState[index].list[selectedTodo].month == 2) {
+              if(!isLeapYear) {
+                newState[index].list[selectedTodo].day = 28
+              } else {
+                newState[index].list[selectedTodo].day = 29;
+              } 
+            } else { 
+              newState[index].list[selectedTodo].day = 31;
+            }
+            break;
+          default:
+            newState[index].list[selectedTodo].day = 0;
+            break;
+        }
+
+        // Assigning day of the year as a number
+        var dayCount: number = 0;
+        var month: number = newState[index].list[selectedTodo].month as number;
+        var day: number = newState[index].list[selectedTodo].day as number;
+        var year: number = newState[index].list[selectedTodo].year as number;
+
+        console.log("Month: ",month);
+        console.log("Day: ",day);
+        console.log("Year: ",year);
+        
+        if(month > 1)
+          dayCount += 31;
+        if(month > 2) {
+          if(isLeapYear)
+            dayCount += 29;
+          else
+            dayCount += 28;
+        }
+        if(month > 3)
+          dayCount += 31;
+        if(month > 4)
+          dayCount += 30;
+        if(month > 5)
+          dayCount += 31;
+        if(month > 6)
+          dayCount += 30;
+        if(month > 7)
+          dayCount += 31;
+        if(month > 8) 
+          dayCount += 31;
+        if(month > 9) 
+          dayCount += 30;
+        if(month > 10)
+          dayCount += 31;
+        if(month > 11)
+          dayCount += 30;
+
+        dayCount += day;
+
+        newState[index].list[selectedTodo].dayOfYear = dayCount;
+
+        console.log("Day of the year: ",dayCount);
       }
       return newState;
     }
