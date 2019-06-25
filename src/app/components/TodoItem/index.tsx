@@ -91,9 +91,21 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
   }
 
   handleChange(date: Date, id: number) {
-    //console.log((date.getMonth() + 1).toString() + "/" + date.getDate().toString() +"/"+ date.getFullYear().toString());
     var name = (date.getMonth() + 1).toString() + "/" + date.getDate().toString() +"/"+ date.getFullYear().toString();
     this.handleDate(id, name);
+  }
+
+  handleChangeRaw(value: string, id:number) {
+    if(value.toLowerCase() === "tomorrow") {
+      var today = new Date();
+      today.setDate(today.getDate()+1);
+      this.handleChange(today, id);
+    }
+    if(value.toLowerCase() === "today") {
+      var today = new Date();
+      today.setDate(today.getDate());
+      this.handleChange(today, id);
+    }
   }
 
   handleNotes(id: number, notes: string){
@@ -150,9 +162,12 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
           />
           <label onDoubleClick={() => this.handleDoubleClick()}>{todo.name}</label>
           <DatePicker 
+            className={style.date}
             selected={new Date(todo.date)}
+            onChangeRaw={(event) => todo.id && this.handleChangeRaw(event.target.value, todo.id)}
             onChange={(date) => todo.id && this.handleChange(date as Date, todo.id)}
             todayButton={"Today"}
+            
             placeholderText={"Click to select a date"}
             minDate={new Date()}
           />
