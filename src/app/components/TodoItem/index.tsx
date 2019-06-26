@@ -69,17 +69,29 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
     //if the day is greater than the month day or less that 0 => false
     if(accMonth < numInput[1] || 0 > numInput[1])
       return false;
+    //*
     var today = new Date();
     var day = today.getDate();
     var month = today.getMonth() + 1;
     var year = today.getFullYear();
+    //*/
+    /*
+    // Testing values
+    var day = 1;
+    var month = 6;
+    var year = 2019;
+    //*/
+
     if(year > numInput[2] || (year == numInput[2] && (month > numInput[0] || (month == numInput[0] && day > numInput[1]))))
       return false;
     return true;
   }
   //Adds a due date to the todo and sets the state
   handleDate(id: number, name: string) {
-    if(!this.dateValidation(name)) return;
+    if(!this.dateValidation(name)) {
+      window.alert("Invalid date!");
+      return;
+    }
     this.props.addDate({name, id});
     this.setState({});
   }
@@ -94,25 +106,94 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
   render() {
     const { todo, completeTodo, deleteTodo } = this.props;
     // Display date as today or tomorrow if it matches those dates
+    //*
     var today = new Date();
     var day = today.getDate();
     var month = today.getMonth() + 1;
     var year = today.getFullYear();
-    var currentDate: string = month+'/'+day+'/'+year;
-    var tomorrowsDate: string = month+'/'+(day + 1)+'/'+year;
-    var regexToday = new RegExp(currentDate);
-    var regexTomorrow = new RegExp(tomorrowsDate);
-    console.log("Created date: ",currentDate);
-    console.log("Todo date: ",todo.date)
-    if ((todo.date).match(regexToday) !== null) {
-      var date = "Today";
-      console.log("today match");
-    } else if ((todo.date).match(regexTomorrow) !== null) {
-      var date = "Tomorrow";
-      console.log("tomorrow match");
+    //*/
+    /*
+    // Testing values
+    var day = 1;
+    var month = 6;
+    var year = 2019;
+    //*/
+
+    var isLeapYear: boolean;
+    if (((year % 4 == 0) && !(year % 100 == 0)) || (year % 400 == 0)) {
+      isLeapYear = true;
     } else {
-      var date = todo.date;
+      isLeapYear = false;
     }
+
+    var dayCount = 0;
+
+    if(month > 1)
+      dayCount += 31;
+    if(month > 2) {
+      if(isLeapYear)
+        dayCount += 29;
+      else
+        dayCount += 28;
+    }
+    if(month > 3)
+      dayCount += 31;
+    if(month > 4)
+      dayCount += 30;
+    if(month > 5)
+      dayCount += 31;
+    if(month > 6)
+       dayCount += 30;
+    if(month > 7)
+      dayCount += 31;
+    if(month > 8) 
+      dayCount += 31;
+    if(month > 9) 
+      dayCount += 30;
+    if(month > 10)
+      dayCount += 31;
+    if(month > 11)
+      dayCount += 30;
+
+    dayCount += day;
+    var date = "";
+
+    if ((todo.dayOfYear != undefined) && (todo.month != undefined) && (todo.year != undefined)) {
+      if (todo.year == year) {
+        if (todo.dayOfYear === dayCount)
+          date = "Today";
+        else if (todo.dayOfYear === (dayCount + 1))
+          date = "Tomorrow";
+        else if ((todo.dayOfYear - dayCount) <= 6) {
+          var daysUntil = todo.dayOfYear - dayCount;
+          date = daysUntil+" days";
+        } else if (todo.month === month) {
+          if ((todo.dayOfYear - dayCount) < 14)  
+            date = "Next week";
+          else if ((todo.dayOfYear - dayCount) < 21)
+            date = "2 weeks";
+          else if ((todo.dayOfYear - dayCount) < 28)
+            date = "3 weeks";
+          else 
+            date = "4 weeks";
+        } else if ((todo.month - month) <= 12) {
+          if ((todo.month - month) === 1)
+            date = "Next month";
+          else {
+            var monthsUntil = todo.month - month;
+            date = monthsUntil+" months";
+          }
+        } 
+      } else {
+        if ((todo.year - year) === 1)
+          date = "Next year";
+        else {
+          var yearsUntil = todo.year - year;
+          date = yearsUntil+" years";
+        }
+      }
+    } else
+      var date = todo.date;
     console.log("Final date: ",date);
     
     let element;
@@ -139,7 +220,7 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
             onClick={() => {
               var date = prompt('Enter a due date in the format mm/dd/yyyy: ','Due date...');
               if ( date ) {
-                console.log('date: ',date);
+                console.log('User input date: ',date);
                 this.handleDate(todo.id, date as string);
               }
             }}
