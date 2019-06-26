@@ -60,8 +60,10 @@
     "webpack-dev-server": "^3.1.14"
   },
   "dependencies": {
+    "@types/react-datepicker": "^2.3.0",
     "classnames": "^2.2.6",
     "react": "^16.8.1",
+    "react-datepicker": "^2.7.0",
     "react-dom": "^16.8.1",
     "react-redux": "^6.0.0",
     "react-router": "^4.3.1",

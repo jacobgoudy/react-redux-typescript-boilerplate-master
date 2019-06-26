@@ -4,6 +4,10 @@ import * as style from './style.css';
 import { TodoModel } from 'app/models';
 import { ListActions } from 'app/actions/lists';
 import { TodoTextInput } from '../TodoTextInput';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+//CSS Modules, react-datepicker-cssmodules.css
+import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 export namespace TodoItem {
   export interface Props {
@@ -18,13 +22,15 @@ export namespace TodoItem {
 
   export interface State {
     editing: boolean;
+    startDate: Date;
   }
 }
 
 export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
   constructor(props: TodoItem.Props, context?: any) {
     super(props, context);
-    this.state = { editing: false };
+    this.state = { editing: false, startDate: new Date() };
+    this.handleChange = this.handleChange.bind(this)
   }
 
   handleDoubleClick() {
@@ -96,6 +102,24 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
     this.setState({});
   }
 
+  handleChange(date: Date, id: number) {
+    var name = (date.getMonth() + 1).toString() + "/" + date.getDate().toString() +"/"+ date.getFullYear().toString();
+    this.handleDate(id, name);
+  }
+
+  handleChangeRaw(value: string, id:number) {
+    if(value.toLowerCase() === "tomorrow") {
+      var today = new Date();
+      today.setDate(today.getDate()+1);
+      this.handleChange(today, id);
+    }
+    if(value.toLowerCase() === "today") {
+      var today = new Date();
+      today.setDate(today.getDate());
+      this.handleChange(today, id);
+    }
+  }
+
   handleNotes(id: number, notes: string){
     var name = prompt(notes + " \nAdd more notes:",notes);
     if(name != null && name.trim().length != 0 && name.trim() != notes.trim()) {
@@ -103,10 +127,8 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
     }
   }
 
-  render() {
-    const { todo, completeTodo, deleteTodo } = this.props;
-    // Display date as today or tomorrow if it matches those dates
-    //*
+  // Display date as today or tomorrow if it matches those dates
+  handleChangeToToday(todo:TodoModel){
     var today = new Date();
     var day = today.getDate();
     var month = today.getMonth() + 1;
@@ -195,7 +217,12 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
     } else
       var date = todo.date;
     console.log("Final date: ",date);
-    
+    return date;
+  }
+
+  render() {
+    const { todo, completeTodo, deleteTodo } = this.props;
+    var date = this.handleChangeToToday(todo);
     let element;
     if (this.state.editing) {
       element = (
@@ -215,16 +242,16 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
             onChange={() => todo.id && completeTodo(todo.id)}
           />
           <label onDoubleClick={() => this.handleDoubleClick()}>{todo.name}</label>
-          <button
+          <DatePicker 
             className={style.date}
-            onClick={() => {
-              var date = prompt('Enter a due date in the format mm/dd/yyyy: ','Due date...');
-              if ( date ) {
-                console.log('User input date: ',date);
-                this.handleDate(todo.id, date as string);
-              }
-            }}
-          >{date}</button>
+            selected={new Date(todo.date)}
+            value={date}
+            onChangeRaw={(event) => todo.id && this.handleChangeRaw(event.target.value, todo.id)}
+            onChange={(date) => todo.id && this.handleChange(date as Date, todo.id)}
+            todayButton={"Today"}
+            placeholderText={"Click to select a date"}
+            minDate={new Date()}
+          />
           <button 
             className={style.assign}
             onClick={() => {
