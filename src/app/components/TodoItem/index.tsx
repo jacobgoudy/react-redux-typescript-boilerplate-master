@@ -200,7 +200,12 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
             date = "4 weeks";
         } else if ((todo.month - month) <= 12) {
           if ((todo.month - month) === 1)
-            date = "Next month";
+            if ((todo.dayOfYear - dayCount) < 14)  
+              date = "Next week";
+            else if ((todo.dayOfYear - dayCount) < 21)
+              date = "2 weeks";
+            else
+              date = "Next month";
           else {
             var monthsUntil = todo.month - month;
             date = monthsUntil+" months";
