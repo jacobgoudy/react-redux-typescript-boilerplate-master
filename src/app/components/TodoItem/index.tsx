@@ -115,6 +115,7 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
     }
   }
 
+  // Display date as today or tomorrow if it matches those dates
   handleChangeToToday(todo:TodoModel){
     var today = new Date();
     var day = today.getDate();
@@ -136,12 +137,12 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
       var date = todo.date;
     }
     console.log("Final date: ",date);
+    return date;
   }
 
   render() {
     const { todo, completeTodo, deleteTodo } = this.props;
-    // Display date as today or tomorrow if it matches those dates
-    this.handleChangeToToday(todo);
+    var date = this.handleChangeToToday(todo);
     let element;
     if (this.state.editing) {
       element = (
@@ -164,6 +165,7 @@ export class TodoItem extends React.Component<TodoItem.Props, TodoItem.State> {
           <DatePicker 
             className={style.date}
             selected={new Date(todo.date)}
+            value={date}
             onChangeRaw={(event) => todo.id && this.handleChangeRaw(event.target.value, todo.id)}
             onChange={(date) => todo.id && this.handleChange(date as Date, todo.id)}
             todayButton={"Today"}
