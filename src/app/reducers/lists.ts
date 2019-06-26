@@ -185,14 +185,25 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
       if(action.payload){
         const id = action.payload.id;
         var selectedTodo = newState[index].list.findIndex(x => x.id === id);
-        newState[index].list[selectedTodo].date = action.payload.name;
         console.log(newState[index].list[selectedTodo]);
 
         var dateArr = action.payload.name.split('/',3);
         console.log(dateArr);
 
         // Assigning year as a number
+        //var today = new Date();
+        //var currentYear = today.getFullYear();
         var thisYear:number = (dateArr[2] as unknown) as number;
+
+        /*
+        if (currentYear === thisYear) {
+          newState[index].list[selectedTodo].year = 2019;
+        } else {
+          newState[index].list[selectedTodo].year = 2020;
+        }
+        //*/
+        
+
         newState[index].list[selectedTodo].year = (dateArr[2] as unknown) as number;
         var isLeapYear: boolean;
         if (((thisYear % 4 == 0) && !(thisYear % 100 == 0)) || (thisYear % 400 == 0)) {
@@ -222,6 +233,7 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
           case "5":
           case "05":
             newState[index].list[selectedTodo].month = 5;
+            break;
           case "6":
           case "06":
             newState[index].list[selectedTodo].month = 6;
@@ -271,6 +283,7 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
           case "5":
           case "05":
             newState[index].list[selectedTodo].day = 5;
+            break;
           case "6":
           case "06":
             newState[index].list[selectedTodo].day = 6;
@@ -425,6 +438,9 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
         dayCount += day;
 
         newState[index].list[selectedTodo].dayOfYear = dayCount;
+        var date = month+'/'+day+'/'+year;
+        newState[index].list[selectedTodo].date = date;
+        console.log("Due date: ",date);
 
         console.log("Day of the year: ",dayCount);
       }
