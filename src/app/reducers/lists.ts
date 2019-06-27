@@ -7,21 +7,21 @@ const initialState: RootState.ListState = [
   {
     id:1,
     name: 'Use Redux',
-    list: [{id: 1, name:'Learn Typescript', completed:false, assign:"Not Assigned", notes:"Learn how to unit testing.", date:"07/21/2019"}, {id:2, name:'Add Lists', completed:false, assign:"Not Assigned", notes:"", date:"09/22/2019"}],
+    list: [{id: 1, name:'Learn Typescript', completed:false, assign:"Not Assigned", notes:"Learn how to do unit testing.", date:"07/21/2019", dayOfYear:202, day:21, month:7, year:2019}, {id:2, name:'Add Lists', completed:false, assign:"Not Assigned", notes:"", date:"09/22/2019", dayOfYear:265, day:22, month:9, year:2019}],
     completed: false,
     isSelected: false
   }
   ,{
     id:2,
     name:'Use Java',
-    list: [{id: 1, name:'Haskell', completed:false, assign:"Jacob", notes:"Fake news", date:"11/23/2021"}, {id:2, name:'Python', completed:false, assign:"Not Assigned", notes:"Does this even matter.", date:"09/23/2020"}],
+    list: [{id: 1, name:'Haskell', completed:false, assign:"Jacob", notes:"Fake news", date:"11/23/2021", dayOfYear:327, day:23, month:11, year:2021}, {id:2, name:'Python', completed:false, assign:"Not Assigned", notes:"Does this even matter.", date:"09/23/2020", dayOfYear:267, day:23, month:9, year:2020}],
     completed: false,
     isSelected: false
   },
   {
     id:3,
     name:'Interns',
-    list: [{id:1, name:'Zach', completed:false, assign:"Not Assigned", notes:"", date:"11/12/2019"}, {id:2, name:'Jacob', completed:false, assign:"Zach", notes:"temp", date:"12/30/2019"}],
+    list: [{id:1, name:'Zach', completed:false, assign:"Not Assigned", notes:"", date:"11/12/2019", dayOfYear:316, day:12, month:11, year:2019}, {id:2, name:'Jacob', completed:false, assign:"Zach", notes:"temp", date:"12/30/2019", dayOfYear:364, day:30, month:12, year:2019}],
     completed: false,
     isSelected: false
   }
@@ -72,6 +72,13 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
     [ListActions.Type.ADD_TODO]: (state, action) => {
       if(action.payload && action.payload.name){
         let newState = state;
+        var today = new Date();
+
+        var month = today.getMonth() + 1;
+        var day = today.getDate();
+        var year = today.getFullYear();
+
+        var fullDate = month+'/'+day+'/'+year;
         //Finds the index of the selected list
         var index = newState.findIndex(x => x.isSelected === true);
         newState[index].list.push({
@@ -81,7 +88,7 @@ export const listReducer = handleActions<RootState.ListState, ListModel>(
           completed:false,
           assign:"Not Assigned",
           notes:"",
-          date: "6/27/2019"
+          date: fullDate
         });
         return newState;
       }
